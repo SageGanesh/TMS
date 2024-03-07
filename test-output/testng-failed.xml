@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
+  <test thread-count="5" name="Default test(failed)">
+    <classes>
+      <class name="TMS_Regression_Suite.Project_Task_Creation">
+        <methods>
+          <include name="report_flush"/>
+          <include name="launch"/>
+          <include name="tearDown"/>
+          <include name="time_sheet_approval_basic_flow_in_TMS"/>
+          <include name="login_with_valid_credentials_in_TMS"/>
+          <include name="Report_setup"/>
+          <include name="login_with_basic_valid_credentials_in_TMS"/>
+        </methods>
+      </class> <!-- TMS_Regression_Suite.Project_Task_Creation -->
+    </classes>
+  </test> <!-- Default test(failed) -->
+</suite> <!-- Failed suite [Default suite] -->
