@@ -8,10 +8,8 @@
           <include name="report_flush"/>
           <include name="launch"/>
           <include name="tearDown"/>
-          <include name="time_sheet_approval_basic_flow_in_TMS"/>
-          <include name="login_with_valid_credentials_in_TMS"/>
+          <include name="Submit_timesheetWithout_isbillabletoggle"/>
           <include name="Report_setup"/>
-          <include name="login_with_basic_valid_credentials_in_TMS"/>
         </methods>
       </class> <!-- TMS_Regression_Suite.Project_Task_Creation -->
     </classes>

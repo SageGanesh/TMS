@@ -13,14 +13,12 @@ import org.testng.annotations.BeforeMethod;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
+
 public class Base_Page_TMS {
-
 	
-
 	WebDriver driver;
-	
     WebDriverWait wait;
-	
     Utility util;
 	
 	/*
@@ -44,7 +42,8 @@ WebElement ele;
 	@BeforeMethod
 	public void  launch() {
 		
-		  System.setProperty("webdriver.chrome.driver", "C:\\Users\\Ganesh\\Downloads\\chrome-win32\\chromedriver.exe");
+		 // System.setProperty("webdriver.chrome.driver", "C:\\Users\\Ganesh\\Downloads\\chrome-win32\\chromedriver.exe");
+		WebDriverManager.chromedriver().setup();
 	      driver =new  ChromeDriver();
 		  driver.manage().window().maximize();
 		  driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(30));
@@ -69,15 +68,5 @@ WebElement ele;
 	  Thread.sleep(3000);
 	  driver.quit();	
 	}
-	
-	
-	
 }
-
-	
-	
-	
-	
-	
-	
 

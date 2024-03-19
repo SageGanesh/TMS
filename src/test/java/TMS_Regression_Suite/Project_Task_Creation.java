@@ -41,49 +41,49 @@ public class Project_Task_Creation extends Base_Page_TMS {
 
 	}
 
-	  @Test(priority = 5, description = "TimeSheet approval work flow :") public
-	  void time_sheet_approval_basic_flow_in_TMS() throws InterruptedException,
-	  IOException {
-	  
-			ExtentTest test1 = extent.createTest("time sheet should be approved by given approver : ")
-					.assignCategory("TimeSheet_Approval");
-			test1.getStatus();
-			test1.info("timesheet approval");
-			wait = new WebDriverWait(driver, Duration.ofSeconds(20));
-			driver.findElement(By.xpath("//input[@id='email']")).sendKeys("mkothakapa@sageitinc.com");
-
-			driver.findElement(By.xpath("//input[@placeholder='Enter password']")).sendKeys("Sageitinc@1");
-
-			driver.findElement(By.xpath("//button[@type='submit']")).click();
-
-			WebElement element1 = wait
-					.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='inlineRadio2']")));
-			Thread.sleep(6000);
-			((JavascriptExecutor) driver).executeScript("arguments[0].click();", element1);
-
-			WebElement element2 = wait.until(
-					ExpectedConditions.elementToBeClickable(By.xpath("//a[text()='09/01/2023 - 09/30/2023'][1]")));
-			Thread.sleep(6000);
-			((JavascriptExecutor) driver).executeScript("arguments[0].click();", element2);
-
-			
-			WebElement element3 = wait.until(
-					ExpectedConditions.elementToBeClickable(By.xpath("//div[@role='textbox']")));
-			Thread.sleep(6000);
-			element3.sendKeys("TimeSheet Summary");
-
-			driver.findElement(By.xpath("//button[text()='Approve']")).click();
-
-			Utility ut = new Utility(driver);
-
-			ut.ScreenShot("timesheet_approved");
-
-			extent.flush();
-
-	  }
-	  
-	   
-	 @Test(priority = 2, description = "should be able to login with basic user and should be able to submit the Timesheet")
+//	  @Test(priority = 5, description = "TimeSheet approval work flow :") public
+//	  void time_sheet_approval_basic_flow_in_TMS() throws InterruptedException,
+//	  IOException {
+//	  
+//			ExtentTest test1 = extent.createTest("time sheet should be approved by given approver : ")
+//					.assignCategory("TimeSheet_Approval");
+//			test1.getStatus();
+//			test1.info("timesheet approval");
+//			wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+//			driver.findElement(By.xpath("//input[@id='email']")).sendKeys("mkothakapa@sageitinc.com");
+//
+//			driver.findElement(By.xpath("//input[@placeholder='Enter password']")).sendKeys("Sageitinc@1");
+//
+//			driver.findElement(By.xpath("//button[@type='submit']")).click();
+//
+//			WebElement element1 = wait
+//					.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='inlineRadio2']")));
+//			Thread.sleep(6000);
+//			((JavascriptExecutor) driver).executeScript("arguments[0].click();", element1);
+//
+//			WebElement element2 = wait.until(
+//					ExpectedConditions.elementToBeClickable(By.xpath("//a[text()='09/01/2023 - 09/30/2023'][1]")));
+//			Thread.sleep(6000);
+//			((JavascriptExecutor) driver).executeScript("arguments[0].click();", element2);
+//
+//			
+//			WebElement element3 = wait.until(
+//					ExpectedConditions.elementToBeClickable(By.xpath("//div[@role='textbox']")));
+//			Thread.sleep(6000);
+//			element3.sendKeys("TimeSheet Summary");
+//
+//			driver.findElement(By.xpath("//button[text()='Approve']")).click();
+//
+//			Utility ut = new Utility(driver);
+//
+//			ut.ScreenShot("timesheet_approved");
+//
+//			extent.flush();
+//
+//	  }
+//	  
+//	   
+	/* @Test(priority = 2, description = "should be able to login with basic user and should be able to submit the Timesheet")
 	public void login_with_basic_valid_credentials_in_TMS() throws InterruptedException, IOException {
 
 		ExtentTest log = extent.createTest(
@@ -98,10 +98,10 @@ public class Project_Task_Creation extends Base_Page_TMS {
 		WebElement element = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[text()=' Projects ' and @type='button' and @data-toggle='dropdown']"))); 
 		((JavascriptExecutor)driver).executeScript("arguments[0].click();", element);
 		Thread.sleep(8000);
-		WebElement element1=wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@id='3selfproject']")));
-		  Thread.sleep(6000);
+		WebElement element1=wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[normalize-space()='TestAutomation10']")));
+		  Thread.sleep(1000);
 		((JavascriptExecutor)driver).executeScript("arguments[0].click();", element1);
-	    Thread.sleep(6000);
+	    Thread.sleep(1000);
 	    JavascriptExecutor js=(JavascriptExecutor)driver;
 	    WebElement timesheetlink2=wait.until(ExpectedConditions.elementToBeClickable(By.xpath(
 				"//a[text()='09/01/2023 - 09/30/2023']")));
@@ -231,28 +231,28 @@ public class Project_Task_Creation extends Base_Page_TMS {
 	public void login_with_valid_credentials_in_TMS() throws InterruptedException, IOException {
 
 		ExtentTest test1 = extent.createTest(
-				"verify the login with admin credentials and create the new project and assigning the users and creating the task :")
+				"Verify end to end functionality of Projects Module")
 				.assignCategory("Project_Creation");
 		System.out.println(test1.getStatus());
 		JavascriptExecutor js = (JavascriptExecutor) driver;
-		wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+		wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 		test1.info("attempting to login into the system by using the admin credentials");
 		driver.findElement(By.xpath("//input[@id='email']")).sendKeys("admin@root.com");
 		driver.findElement(By.xpath("//input[@placeholder='Enter password']")).sendKeys("123Pa$$word!");
 		driver.findElement(By.xpath("//button[@type='submit']")).click();
-		test1.info("login is successful and the user should be able to land on the homepage ");
+		test1.pass("Login Successfully");
 		WebElement ele = driver.findElement(By.xpath("//i[@class='bx bx-receipt ng-star-inserted']"));
 		Actions action = new Actions(driver);
 		action.moveToElement(ele);
 		ele.click();
-		Thread.sleep(5000);
+		Thread.sleep(1000);
 		driver.findElement(By.xpath("//a[@class='btn btn-primary']")).click();
 		By text = By.xpath("//input[@placeholder='Name']"); // By date1=
 		By.xpath("//button[@fdprocessedid='n174oo']");
 		wait.until(ExpectedConditions.presenceOfElementLocated(text));
 		WebElement textbox = driver.findElement(text);
 		test1.info("creating the new project : entering the project details ");
-		textbox.sendKeys("TestAutomation10");
+		textbox.sendKeys("TestAutomation04");//
 		Thread.sleep(2000);
 		List<WebElement> datepickers = driver.findElements(
 				By.xpath("//button[@type='button' and @class='btn btn-outline-secondary fa fa-calendar']"));
@@ -268,28 +268,29 @@ public class Project_Task_Creation extends Base_Page_TMS {
 		List<WebElement> enddate = driver.findElements(By.xpath("//div[text()='30']"));
 		enddate.get(1).click();
 		driver.findElement(By.xpath("//select[@id='form-project-clientId']")).click();
-		driver.findElement(By.xpath("//option[@title='SageIT']")).click();
+		driver.findElement(By.xpath("//option[@title='Sage IT']")).click();
 		WebElement drop1 = driver.findElement(By.xpath("//select[@id='form-project-userId']"));
 		drop1.click();
 		Select selt1 = new Select(drop1);
-		selt1.selectByVisibleText("root Admin");
+		selt1.selectByVisibleText("root RootAdmin");
 		Thread.sleep(2000);
 		WebElement approver = driver.findElement(By.xpath("//select[@id='form-project-approverId']"));
 		approver.click();
 		Select selt2 = new Select(approver);
-		selt2.selectByVisibleText("Mounika kothakapa");
+		selt2.selectByVisibleText("Koonisetty Srinivasa Rao");
 		driver.findElement(By.xpath("//select[@id='form-project-projectTypeId']")).click();
 		driver.findElement(By.xpath("//option[text()='Fixed fee']")).click();
 		driver.findElement(By.xpath("//select[@id='form-project-periodTypeId']")).click();
 		driver.findElement(By.xpath("//select[@id='form-project-periodTypeId']//option[@title='Monthly']")).click();
-		driver.findElement(By.xpath("//input[@id='form-project-aparNumber']")).sendKeys("123456");
+		driver.findElement(By.xpath("//input[@id='form-project-aparNumber']")).sendKeys("1245");
 		Thread.sleep(3000);
-		test1.info("project is created successfully :");
-		Utility ut = new Utility(driver); // ut.ScreenShot("fname");
+		test1.pass("Project Successfully Creadted");
+//	Utility ut = new Utility(driver); // ut.ScreenShot("fname");
 		driver.findElement(By.xpath("//button[text()='Submit']")).click();
 		Thread.sleep(5000);
-		test1.addScreenCaptureFromPath(ut.ScreenShot("project_created"));
-		test1.info("assigning the users to the project ");
+//		test1.addScreenCaptureFromPath(ut.ScreenShot("project_created"));
+//		Thread.sleep(5000);
+		test1.info("Assigning the users to the project Functionality ");
 		driver.findElement(By.xpath("//button[text()='Users']")).click();
 		Thread.sleep(5000);
 		driver.findElement(By.xpath("//span[@class='dropdown-btn']")).click();
@@ -298,7 +299,9 @@ public class Project_Task_Creation extends Base_Page_TMS {
 		WebElement savebutton1 = driver.findElement(By.xpath("//button[text()='Save']"));
 		js.executeScript("arguments[0].click();", savebutton1);
 		Thread.sleep(5000);
-		test1.addScreenCaptureFromPath(ut.ScreenShot("users_created"));
+//		test1.addScreenCaptureFromPath(ut.ScreenShot("users_created"));
+//		Thread.sleep(5000);
+		test1.pass("Successfully assigned user to the project");
 		driver.findElement(By.xpath("//button[text()='Task']")).click();
 		test1.info("creating the task for the users ");
 		driver.findElement(By.xpath("//a[text()='Add Task']")).click();
@@ -316,51 +319,222 @@ public class Project_Task_Creation extends Base_Page_TMS {
 				.findElement(By.xpath("//div[@aria-label='Saturday, September 30, 2023']//div[text()='30']"));
 		calendarday2.click();
 		driver.findElement(By.xpath("//span[@class='dropdown-multiselect__caret']")).click();
-		driver.findElement(By.xpath("//div[text()='Select All']")).click();
+		//driver.findElement(By.xpath("//div[text()='Select All']")).click();
 		driver.findElement(By.xpath("//a[text()='Add Task Users']")).click();
 		Thread.sleep(5000);
-		WebElement savebutton2 = driver.findElement(By.xpath("//button[text()='Save']"));
-		Thread.sleep(5000);
-		// js.executeScript("arguments[0].scrollIntoView(true);", savebutton2);
-		js.executeScript("arguments[0].click();", savebutton2);
-		Thread.sleep(5000);
-		// savebutton2.click(); Thread.sleep(5000);
-		test1.info("task is created successfully :");
-		test1.addScreenCaptureFromPath(ut.ScreenShot("task_created"));
-		Thread.sleep(5000);
+		driver.findElement(By.xpath("//a[text()='Cancel']")).click();
+		test1.pass("Successifully verified assigned task functionality");
+//		WebElement savebutton2 = driver.findElement(By.xpath("//button[text()='Save']"));
+//		Thread.sleep(5000);
+//		// js.executeScript("arguments[0].scrollIntoView(true);", savebutton2);
+//		js.executeScript("arguments[0].click();", savebutton2);
+//		Thread.sleep(5000);
+//		// savebutton2.click(); Thread.sleep(5000);
+//		test1.info("task is created successfully :");
+//		test1.addScreenCaptureFromPath(ut.ScreenShot("task_created"));
+//		Thread.sleep(5000);
 
 	}
 
+	
+	  
+	  @Test(priority=3 , description
+	  ="with invalid credentials , the system should not allow ,  the user to login in to the system and it should through an error saying please enter a valid data"
+	  ) public void login_with_invalid_credentials_in_TMS() throws InterruptedException {
+	 
+	 ExtentTest test3 = extent.createTest(
+				"Verify Login mode functionality with invalid credentials")
+				.assignCategory("Project_Creation");
+	  
+	  driver.findElement(By.xpath("//input[@id='email']")).sendKeys(
+	  "jfljsljflajsfj");
+	  test3.info("Enter invalid ID");
+	  
+	  driver.findElement(By.xpath("//input[@placeholder='Enter password']")).
+	  sendKeys("jsldfjasjlsfh");
+	  test3.info("Enter invalid Pass");
+	  
+	  driver.findElement(By.xpath("//button[@type='submit']")).click();
+//	  Utility ut = new Utility(driver);
+//	  test3.addScreenCaptureFromPath(ut.ScreenShot("project_created"));
+//	  Thread.sleep(5000);
+	  test3.pass("Successfully verify negative scenario with invalid credentials");
+	  
+	  }
+	  
+	  
+	  @Test(priority=4, description
+	  ="with in empty credentials , the system should not allow ,  the user to login in to the system and it should through an error saying username and password can,t be empty"
+	  ) public void login_with_emptydata_credentials_in_TMS() throws InterruptedException {
+	 
+	 ExtentTest test4 = extent.createTest(
+				"Verify Login mode functionality with empty text box")
+				.assignCategory("Project_Creation");
+	  
+	  driver.findElement(By.xpath("//input[@id='email']")).sendKeys(" ");
+	  test4.info("Without Entering ID");
+	  
+	  driver.findElement(By.xpath("//input[@placeholder='Enter password']")).
+	  sendKeys("  ");
+	  test4.info("Without Entering Pass");
+	  
+	  driver.findElement(By.xpath("//button[@type='submit']")).click();
+//	  Utility ut = new Utility(driver);
+//	  test4.addScreenCaptureFromPath(ut.ScreenShot("project_created"));
+//	  Thread.sleep(5000);
+	  test4.pass("Successfully verify negative scenario without entering any credentials");
+	  
+	  }*/
+	  
 	/*
-	 * 
-	 * @Test(priority=3 , description
-	 * ="with invalid credentials , the system should not allow ,  the user to login in to the system and it should through an error saying please enter a valid data"
-	 * ) public void login_with_invalid_credentials_in_TMS() {
-	 * 
-	 * driver.findElement(By.xpath("//input[@id='email']")).sendKeys(
-	 * "jfljsljflajsfj");
-	 * 
-	 * driver.findElement(By.xpath("//input[@placeholder='Enter password']")).
-	 * sendKeys("jsldfjasjlsfh");
-	 * 
-	 * driver.findElement(By.xpath("//button[@type='submit']")).click();
-	 * 
-	 * }
-	 * 
-	 * 
-	 * @Test(priority=4, description
-	 * ="with in empty credentials , the system should not allow ,  the user to login in to the system and it should through an error saying username and password can,t be empty"
-	 * ) public void login_with_emptydata_credentials_in_TMS() {
-	 * 
-	 * driver.findElement(By.xpath("//input[@id='email']")).sendKeys(" ");
-	 * 
-	 * driver.findElement(By.xpath("//input[@placeholder='Enter password']")).
-	 * sendKeys("  ");
-	 * 
-	 * driver.findElement(By.xpath("//button[@type='submit']")).click();
-	 * 
-	 * }
-	 * 
+	 * Submit_timesheetWithout_isbillabletoggle(): This method use to submit the timesheet without clicking on IsBillable Check box.
+	 *  
+	 *  Steps: 
+	 *        1) Open the browser
+	 *        2) Login the application
+	 *        3) Mouse over to Timesheets dropdown 
+	 *        4) Click on Timesheets dropdown
+	 *        5) Click on Timesheet
+	 *        6) Select Task from Task Name dropdown
+	 *        7) Input description in Notes Textbox
+	 *        8) Input working hours in working hours dropdown
+	 *        9) Without clicking on IsBillable Check box click on submit button
+	 *        10)Close the browser
 	 */
+	
+	
+	 @Test(priority=6, description
+			  ="Submit the Timesheet Without clicking on IsBillable toggle."
+			  ) public void Submit_timesheetWithout_isbillabletoggle() throws InterruptedException {
+		  
+		  ExtentTest log = extent.createTest(
+					"Submit the timesheet without clicking on IsBillable Toggle")
+					.assignCategory("Timesheet_Submission");
+			System.out.println(log.getStatus());
+			wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+			
+			driver.findElement(By.xpath("//input[@id='email']")).sendKeys("mpathan@sageitinc.com");
+			driver.findElement(By.xpath("//input[@placeholder='Enter password']")).sendKeys("Sageitinc@1");
+			driver.findElement(By.xpath("//button[@type='submit']")).click();
+			Thread.sleep(3000);
+			log.info("Login with valid credentials");
+			log.pass("Successfully login the application");
+			
+			driver.findElement(By.xpath("//i[@class='bx bx-calendar-check ng-star-inserted']")).click(); // //i[@class='bx bx-calendar-check ng-star-inserted']
+			Thread.sleep(1000);
+			log.info("Click on Timesheets dropdown");
+			driver.findElement(By.xpath("//a[normalize-space()='Timesheet']")).click();
+			log.info("Click on Timesheet");
+			log.pass("Successfully navigate to the timesheet page");
+			
+			//Implementing JavaScript Executor for handling dropdown
+			WebElement taskname_table = driver.findElement(By.xpath("//td//following::select"));
+			 ((JavascriptExecutor)driver).executeScript("arguments[0].click();", taskname_table);
+			Select select=new Select(taskname_table);
+			Thread.sleep(5000);
+			
+			select.selectByVisibleText("QA");
+			log.info("Using Select class handle the dropdown for Task Name");
+			log.pass("Successfully select the Task Name");
+			
+			driver.findElement(By.xpath("//input[@maxlength='50']")).sendKeys("Automation Testing");
+			log.info("Input the description in Notes text box");
+			log.pass("Succuessfully Input the description in the textbox");
+			
+			driver.findElement(By.xpath("//input[@maxlength='5']")).sendKeys("8");
+			log.info("Input the working hours in the textbox");
+			log.pass("Succuessfully Input the working hours in the textbox");
+		
+			driver.findElement(By.xpath("//button[normalize-space()='Submit']")).click();
+			log.info("Click on submit button");
+			log.pass("Successfully click on Submit button");
+			log.pass("Successfully submit the timesheet without clicking on IsBillable toggle button");
+			
+			driver.close();
+			
+	  }
+	 
+			 /*
+			  * Reject_TimesheetWith_Reason(): This method is used to reject the timesheet with reason and comment.
+			  * 
+			  *  Steps:
+			  *  1. Open the browser
+			  *  2. Login the application(Approver)
+			  *  3. Successfully open Timesheet summary page
+			  *  4. Mouse over to 'Team' radio button
+			  *  5. Click on 'Team' radio button
+			  *  6. Mouse over to project date and click on that
+			  *  7. Pop up window should be open
+			  *  8. Mouse over to reject button
+			  *  9. Click on reject button
+			  * 10. Reject Timesheet pop up should be open
+			  * 11. Click on Select rejection reason ("IsBillable" not checked)
+			  * 12. Input comment in the comment box
+			  * 13. Click on rejected button
+			  * 14. Successfully rejected the Timesheet
+			  * 15. Close the browser
+			  */
 
+		  @Test(priority=7, description
+				  ="Reject the Timesheet with reason and comment."
+				  ) public void Reject_TimesheetWith_Reason() throws InterruptedException {
+			  
+			  ExtentTest log = extent.createTest(
+						"Reject the timesheet with reason and comment")
+						.assignCategory("Timesheet_Rejection");
+				System.out.println(log.getStatus());
+				wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+				
+				driver.findElement(By.xpath("//input[@id='email']")).sendKeys("mpathan@sageitinc.com");
+				driver.findElement(By.xpath("//input[@placeholder='Enter password']")).sendKeys("Sageitinc@1");
+				driver.findElement(By.xpath("//button[@type='submit']")).click();
+				driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
+				log.info("Login with valid credentials");
+				log.pass("Successfully login the application");
+				
+				driver.findElement(By.xpath("//input[@id='inlineRadio2']")).click();
+				driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
+				log.info("Click on Team radio button");
+				log.pass("Successfully click on Team radio button");
+				
+				driver.findElement(By.xpath("//a[normalize-space()='03/04/2024 - 03/17/2024']")).click();
+				driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(1));
+				log.info("Mouse over to Project dates and click on Dates");
+				log.pass("Successfully click on project dates");
+				
+				driver.findElement(By.xpath("//button[normalize-space()='Reject']")).click();
+				driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(1));
+				log.info("Click on Reject button present on Popup window");
+				log.pass("Successfully click on Reject button");
+				
+				//Implement select class for handling the dropdown
+				WebElement rejection_reasondrp = driver.findElement(By.xpath("//select[@id='form-rejectionreason']"));
+				 ((JavascriptExecutor)driver).executeScript("arguments[0].click();", rejection_reasondrp);
+				Select select=new Select(rejection_reasondrp);
+				driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(1));
+				
+				select.selectByVisibleText("\"Is Billable\" not checked");
+				driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
+				log.info("Using Select class handling the Rejecton reason dropdown");
+				log.pass("Successfully click on Rejection reason dropdown");
+				
+				driver.findElement(By.xpath("//textarea[@maxlength='200']")).sendKeys("Is Billable toggle is not selected");
+				driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
+				log.info("Input the Comment for the Timsheet Rejection");
+				log.pass("Successfully input the rejection comment");
+			
+				driver.findElement(By.xpath("//div[@class='d-flex align-items-end flex-column mt-2']//div")).click();
+				log.info("Click on Reject button");
+				log.pass("Successfully click on Reject button");
+				
+				driver.findElement(By.xpath("//button[normalize-space()='Close']")).click();
+				log.info("Click on Close button");
+				log.pass("Successfully click on Close button");
+				
+				driver.close();
+				log.pass("Successfully close the browser.");
+				log.pass("Successfully Reject the Timesheet with Reason and Comment");
+	  }
+
+		 
 }

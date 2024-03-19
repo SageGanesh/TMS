@@ -17,9 +17,6 @@ import org.openqa.selenium.WebElement;
 
 public class Utility {
 	
-	
-	
-	
 	TakesScreenshot ts;
 
 	WebDriver driver;
@@ -29,7 +26,7 @@ public class Utility {
 	}
 
 	public String  ScreenShot(String filename) {
-
+           
 		try {
 
 			ts = (TakesScreenshot) driver;
