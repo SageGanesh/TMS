@@ -535,6 +535,77 @@ public class Project_Task_Creation extends Base_Page_TMS {
 				log.pass("Successfully close the browser.");
 				log.pass("Successfully Reject the Timesheet with Reason and Comment");
 	  }
-
-		 
+		  
+		  /*
+		   * Resubmit_TimesheetWith_Isbillable() - This method is used to Resubmit the Timesheet with IsBillable checkbox
+		   * 
+		   * Steps:
+		   *       1.  Open the browser
+           *       2.  Login the application
+           *       3.  Mouse over to Timesheets
+           *       4.  Click on Timesheet
+           *       5.  Select the Project using Project dropdown
+           *       6.  Click on Add Task button // 
+           *       7.  Clicking on "Is Billable" Checkbox
+           *       8.  Select the Task Name using Task Name dropdown
+           *       9.  Input the description in Notes Textbox
+           *      10. Input the working hours hours Textbox
+           *      11. Click on Submit button
+           *      12. Close the browser
+		   * 
+		   */
+		  
+		  @Test(priority=8, description
+				  ="Resubmit the Timesheet With IsBillable Checkbox."
+				  ) public void Resubmit_TimesheetWith_Isbillable() throws InterruptedException {
+			  ExtentTest log = extent.createTest(
+						"Resubmit the Timesheet with clicking on 'IsBillable' checkbox")
+						.assignCategory("Resubmit_Timesheet");
+				System.out.println(log.getStatus());
+				wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+				
+				driver.findElement(By.xpath("//input[@id='email']")).sendKeys("mkonda@sageitinc.com");
+				driver.findElement(By.xpath("//input[@placeholder='Enter password']")).sendKeys("Sageitinc@1");
+				driver.findElement(By.xpath("//button[@type='submit']")).click();
+				driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
+				log.info("Login with valid credentials");
+				log.pass("Successfully login the application");	
+				
+				driver.findElement(By.xpath("//i[@class='bx bx-calendar-check ng-star-inserted']")).click();
+				driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
+				log.info("Click on Timesheets dropdown");
+				driver.findElement(By.xpath("//a[normalize-space()='Timesheet']")).click();
+				log.info("Click on Timesheet");
+				log.pass("Successfully navigate to the timesheet page");
+			
+				//Implementing JavaScript Executor for handling dropdown
+				WebElement taskname_table = driver.findElement(By.xpath("//td//following::select"));
+				 ((JavascriptExecutor)driver).executeScript("arguments[0].click();", taskname_table);
+				Select sc=new Select(taskname_table);
+				driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
+				
+				sc.selectByVisibleText("QA");
+				log.info("Using Select class we can handle dropdown Select Task");
+				log.pass("Successfully select the Task Name");
+				
+				driver.findElement(By.xpath("//input[@maxlength='50']")).sendKeys("Automation Testing");
+				log.info("Input the description in Notes textbox");
+				log.pass("Successfully input the description in the textbox");
+				
+				driver.findElement(By.xpath("//input[@maxlength='5']")).sendKeys("8");
+				log.info("Input the working hours in Textbox");
+				log.pass("Successfully input the working hours in the textbox");
+			
+				driver.findElement(By.xpath("/html/body/app-root/app-layout/app-vertical/div/div/div/app-timesheet/div[1]/div/div/div[2]/div/table/tbody/tr[1]/td[1]/input")).click();
+				log.info("Click on 'IsBillable' checkbox");
+				log.pass("Successfully click on 'IsBillable' checkbox");
+				
+				driver.findElement(By.xpath("//button[normalize-space()='Submit']")).click();
+				log.info("Click on Submit button");
+				log.pass("Successfully click on Submit button");
+				
+				driver.close();
+				log.pass("Successfully close the browser");
+				log.pass("Successfully Resubmit the Timesheet with click on 'IsBillable' checkbox");
+		  }  	 
 }
