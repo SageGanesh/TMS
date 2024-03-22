@@ -388,153 +388,222 @@ public class Project_Task_Creation extends Base_Page_TMS {
 	  
 	/*
 	 * Submit_timesheetWithout_isbillabletoggle(): This method use to submit the timesheet without clicking on IsBillable Check box.
-	 *  
-	 *  Steps: 
-	 *        1) Open the browser
-	 *        2) Login the application
-	 *        3) Mouse over to Timesheets dropdown 
-	 *        4) Click on Timesheets dropdown
-	 *        5) Click on Timesheet
-	 *        6) Select Task from Task Name dropdown
-	 *        7) Input description in Notes Textbox
-	 *        8) Input working hours in working hours dropdown
-	 *        9) Without clicking on IsBillable Check box click on submit button
-	 *        10)Close the browser
+	 * 
+	 * Steps: 
+	 *   1) Open the browser 
+	 *   2) Login the application 
+	 *   3) Mouse over to Timesheets dropdown
+	 *   4) Click on Timesheets dropdown 
+	 *   5) Click on Timesheet 
+	 *   6) Select Task from Task Name dropdown
+	 *   7) Input description in Notes Textbox 
+	 *   8) Input working hours in working hours dropdown
+	 *   9) Without clicking on IsBillable Check box click on submit button
+	 *  10) Close the browser
+	 * 
 	 */
-	
-	
-	 @Test(priority=6, description
-			  ="Submit the Timesheet Without clicking on IsBillable toggle."
-			  ) public void Submit_timesheetWithout_isbillabletoggle() throws InterruptedException {
-		  
-		  ExtentTest log = extent.createTest(
-					"Submit the timesheet without clicking on IsBillable Toggle")
-					.assignCategory("Timesheet_Submission");
-			System.out.println(log.getStatus());
-			wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-			
-			driver.findElement(By.xpath("//input[@id='email']")).sendKeys("mpathan@sageitinc.com");
-			driver.findElement(By.xpath("//input[@placeholder='Enter password']")).sendKeys("Sageitinc@1");
-			driver.findElement(By.xpath("//button[@type='submit']")).click();
-			Thread.sleep(3000);
-			log.info("Login with valid credentials");
-			log.pass("Successfully login the application");
-			
-			driver.findElement(By.xpath("//i[@class='bx bx-calendar-check ng-star-inserted']")).click(); // //i[@class='bx bx-calendar-check ng-star-inserted']
-			Thread.sleep(1000);
-			log.info("Click on Timesheets dropdown");
-			driver.findElement(By.xpath("//a[normalize-space()='Timesheet']")).click();
-			log.info("Click on Timesheet");
-			log.pass("Successfully navigate to the timesheet page");
-			
-			//Implementing JavaScript Executor for handling dropdown
-			WebElement taskname_table = driver.findElement(By.xpath("//td//following::select"));
-			 ((JavascriptExecutor)driver).executeScript("arguments[0].click();", taskname_table);
-			Select select=new Select(taskname_table);
-			Thread.sleep(5000);
-			
-			select.selectByVisibleText("QA");
-			log.info("Using Select class handle the dropdown for Task Name");
-			log.pass("Successfully select the Task Name");
-			
-			driver.findElement(By.xpath("//input[@maxlength='50']")).sendKeys("Automation Testing");
-			log.info("Input the description in Notes text box");
-			log.pass("Succuessfully Input the description in the textbox");
-			
-			driver.findElement(By.xpath("//input[@maxlength='5']")).sendKeys("8");
-			log.info("Input the working hours in the textbox");
-			log.pass("Succuessfully Input the working hours in the textbox");
+
+	@Test(priority = 6, description = "Submit the Timesheet Without clicking on IsBillable toggle.")
+	public void Submit_timesheetWithout_isbillabletoggle() throws InterruptedException {
+
+		ExtentTest log = extent.createTest("Submit the timesheet without clicking on IsBillable Toggle")
+				.assignCategory("Timesheet_Submission");
+		System.out.println(log.getStatus());
+		wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+		driver.findElement(By.xpath("//input[@id='email']")).sendKeys("mpathan@sageitinc.com");
+		driver.findElement(By.xpath("//input[@placeholder='Enter password']")).sendKeys("Sageitinc@1");
+		driver.findElement(By.xpath("//button[@type='submit']")).click();
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
+		log.info("Login with valid credentials");
+		log.pass("Successfully login the application");
+
+		driver.findElement(By.xpath("//i[@class='bx bx-calendar-check ng-star-inserted']")).click();
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
+		log.info("Click on Timesheets dropdown");
+		driver.findElement(By.xpath("//a[normalize-space()='Timesheet']")).click();
+		log.info("Click on Timesheet");
+		log.pass("Successfully navigate to the timesheet page");
+
+		// Implementing JavaScript Executor for handling dropdown
+		WebElement taskname_table = driver.findElement(By.xpath("//td//following::select"));
+		((JavascriptExecutor) driver).executeScript("arguments[0].click();", taskname_table);
+		Select select = new Select(taskname_table);
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
+
+		select.selectByVisibleText("QA");
+		log.info("Using Select class handle the dropdown for Task Name");
+		log.pass("Successfully select the Task Name");
+
+		driver.findElement(By.xpath("//input[@maxlength='50']")).sendKeys("Automation Testing");
+		log.info("Input the description in Notes text box");
+		log.pass("Succuessfully Input the description in the textbox");
+
+		driver.findElement(By.xpath("//input[@maxlength='5']")).sendKeys("8");
+		log.info("Input the working hours in the textbox");
+		log.pass("Succuessfully Input the working hours in the textbox");
+
+		driver.findElement(By.xpath("//button[normalize-space()='Submit']")).click();
+		log.info("Click on submit button");
+		log.pass("Successfully click on Submit button");
 		
-			driver.findElement(By.xpath("//button[normalize-space()='Submit']")).click();
-			log.info("Click on submit button");
-			log.pass("Successfully click on Submit button");
-			log.pass("Successfully submit the timesheet without clicking on IsBillable toggle button");
-			
-			driver.close();
-			
-	  }
-	 
-			 /*
-			  * Reject_TimesheetWith_Reason(): This method is used to reject the timesheet with reason and comment.
-			  * 
-			  *  Steps:
-			  *  1. Open the browser
-			  *  2. Login the application(Approver)
-			  *  3. Successfully open Timesheet summary page
-			  *  4. Mouse over to 'Team' radio button
-			  *  5. Click on 'Team' radio button
-			  *  6. Mouse over to project date and click on that
-			  *  7. Pop up window should be open
-			  *  8. Mouse over to reject button
-			  *  9. Click on reject button
-			  * 10. Reject Timesheet pop up should be open
-			  * 11. Click on Select rejection reason ("IsBillable" not checked)
-			  * 12. Input comment in the comment box
-			  * 13. Click on rejected button
-			  * 14. Successfully rejected the Timesheet
-			  * 15. Close the browser
-			  */
+		driver.close();
+		log.pass("Successfully close the browser.");
+		log.pass("Successfully submit the timesheet without clicking on IsBillable toggle button");
 
-		  @Test(priority=7, description
-				  ="Reject the Timesheet with reason and comment."
-				  ) public void Reject_TimesheetWith_Reason() throws InterruptedException {
-			  
-			  ExtentTest log = extent.createTest(
-						"Reject the timesheet with reason and comment")
-						.assignCategory("Timesheet_Rejection");
-				System.out.println(log.getStatus());
-				wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-				
-				driver.findElement(By.xpath("//input[@id='email']")).sendKeys("mpathan@sageitinc.com");
-				driver.findElement(By.xpath("//input[@placeholder='Enter password']")).sendKeys("Sageitinc@1");
-				driver.findElement(By.xpath("//button[@type='submit']")).click();
-				driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
-				log.info("Login with valid credentials");
-				log.pass("Successfully login the application");
-				
-				driver.findElement(By.xpath("//input[@id='inlineRadio2']")).click();
-				driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
-				log.info("Click on Team radio button");
-				log.pass("Successfully click on Team radio button");
-				
-				driver.findElement(By.xpath("//a[normalize-space()='03/04/2024 - 03/17/2024']")).click();
-				driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(1));
-				log.info("Mouse over to Project dates and click on Dates");
-				log.pass("Successfully click on project dates");
-				
-				driver.findElement(By.xpath("//button[normalize-space()='Reject']")).click();
-				driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(1));
-				log.info("Click on Reject button present on Popup window");
-				log.pass("Successfully click on Reject button");
-				
-				//Implement select class for handling the dropdown
-				WebElement rejection_reasondrp = driver.findElement(By.xpath("//select[@id='form-rejectionreason']"));
-				 ((JavascriptExecutor)driver).executeScript("arguments[0].click();", rejection_reasondrp);
-				Select select=new Select(rejection_reasondrp);
-				driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(1));
-				
-				select.selectByVisibleText("\"Is Billable\" not checked");
-				driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
-				log.info("Using Select class handling the Rejecton reason dropdown");
-				log.pass("Successfully click on Rejection reason dropdown");
-				
-				driver.findElement(By.xpath("//textarea[@maxlength='200']")).sendKeys("Is Billable toggle is not selected");
-				driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
-				log.info("Input the Comment for the Timsheet Rejection");
-				log.pass("Successfully input the rejection comment");
-			
-				driver.findElement(By.xpath("//div[@class='d-flex align-items-end flex-column mt-2']//div")).click();
-				log.info("Click on Reject button");
-				log.pass("Successfully click on Reject button");
-				
-				driver.findElement(By.xpath("//button[normalize-space()='Close']")).click();
-				log.info("Click on Close button");
-				log.pass("Successfully click on Close button");
-				
-				driver.close();
-				log.pass("Successfully close the browser.");
-				log.pass("Successfully Reject the Timesheet with Reason and Comment");
-	  }
+	}
 
-		 
+	/*
+	 * Reject_TimesheetWith_Reason(): This method is used to reject the timesheet with reason and comment.
+	 * 
+	 * Steps: 
+	 *   1. Open the browser 
+	 *   2. Login the application(Approver) 
+	 *   3. Successfully open Timesheet summary page
+	 *   4. Mouse over to 'Team' radio button 
+	 *   5. Click on 'Team' radio button
+	 *   6. Mouse over to project date and click on that 
+	 *   7. Pop up window should be open
+	 *   8. Mouse over to reject button 
+	 *   9. Click on reject button 
+	 *  10. Reject Timesheet pop up should be open
+	 *  11. Click on Select rejection reason ("IsBillable" not checked)
+	 *  12. Input comment in the comment box
+	 *  13. Click on rejected button 
+	 *  14. Successfully rejected the Timesheet 
+	 *  15. Close the browser
+	 * 
+	 */
+
+	@Test(priority = 7, description = "Reject the Timesheet with reason and comment.")
+	public void Reject_TimesheetWith_Reason() throws InterruptedException {
+
+		ExtentTest log = extent.createTest("Reject the timesheet with reason and comment")
+				.assignCategory("Timesheet_Rejection");
+		System.out.println(log.getStatus());
+		wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+		driver.findElement(By.xpath("//input[@id='email']")).sendKeys("mpathan@sageitinc.com");
+		driver.findElement(By.xpath("//input[@placeholder='Enter password']")).sendKeys("Sageitinc@1");
+		driver.findElement(By.xpath("//button[@type='submit']")).click();
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
+		log.info("Login with valid credentials");
+		log.pass("Successfully login the application");
+
+		driver.findElement(By.xpath("//input[@id='inlineRadio2']")).click();
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
+		log.info("Click on Team radio button");
+		log.pass("Successfully click on Team radio button");
+
+		driver.findElement(By.xpath("//a[normalize-space()='03/04/2024 - 03/17/2024']")).click();
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(1));
+		log.info("Mouse over to Project dates and click on Dates");
+		log.pass("Successfully click on project dates");
+
+		driver.findElement(By.xpath("//button[normalize-space()='Reject']")).click();
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(1));
+		log.info("Click on Reject button present on Popup window");
+		log.pass("Successfully click on Reject button");
+
+		// Implement select class for handling the dropdown
+		WebElement rejection_reasondrp = driver.findElement(By.xpath("//select[@id='form-rejectionreason']"));
+		((JavascriptExecutor) driver).executeScript("arguments[0].click();", rejection_reasondrp);
+		Select select = new Select(rejection_reasondrp);
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(1));
+
+		select.selectByVisibleText("\"Is Billable\" not checked");
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
+		log.info("Using Select class handling the Rejecton reason dropdown");
+		log.pass("Successfully click on Rejection reason dropdown");
+
+		driver.findElement(By.xpath("//textarea[@maxlength='200']")).sendKeys("Is Billable toggle is not selected");
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
+		log.info("Input the Comment for the Timsheet Rejection");
+		log.pass("Successfully input the rejection comment");
+
+		driver.findElement(By.xpath("//div[@class='d-flex align-items-end flex-column mt-2']//div")).click();
+		log.info("Click on Reject button");
+		log.pass("Successfully click on Reject button");
+
+		driver.findElement(By.xpath("//button[normalize-space()='Close']")).click();
+		log.info("Click on Close button");
+		log.pass("Successfully click on Close button");
+
+		driver.close();
+		log.pass("Successfully close the browser.");
+		log.pass("Successfully Reject the Timesheet with Reason and Comment");
+	}
+
+	/*
+	 * Resubmit_TimesheetWith_Isbillable() - This method is used to Resubmit the Timesheet with IsBillable checkbox
+	 * 
+	 * Steps: 
+	 *   1. Open the browser 
+	 *   2. Login the application 
+	 *   3. Mouse over toTimesheets 
+	 *   4. Click on Timesheet 
+	 *   5. Select the Project using Project dropdown
+	 *   6. Click on Add Task button // 
+	 *   7. Clicking on "Is Billable" Checkbox 
+	 *   8. Select the Task Name using Task Name dropdown
+	 *   9. Input the description in Notes Textbox
+	 *  10. Input the working hours hours Textbox 
+	 *  11. Click on Submit button
+	 *  12. Close the browser
+	 * 
+	 */
+
+	@Test(priority = 8, description = "Resubmit the Timesheet With IsBillable Checkbox.")
+	public void Resubmit_TimesheetWith_Isbillable() throws InterruptedException {
+		ExtentTest log = extent.createTest("Resubmit the Timesheet with clicking on 'IsBillable' checkbox")
+				.assignCategory("Resubmit_Timesheet");
+		System.out.println(log.getStatus());
+		wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+		driver.findElement(By.xpath("//input[@id='email']")).sendKeys("mkonda@sageitinc.com");
+		driver.findElement(By.xpath("//input[@placeholder='Enter password']")).sendKeys("Sageitinc@1");
+		driver.findElement(By.xpath("//button[@type='submit']")).click();
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
+		log.info("Login with valid credentials");
+		log.pass("Successfully login the application");
+
+		driver.findElement(By.xpath("//i[@class='bx bx-calendar-check ng-star-inserted']")).click();
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
+		log.info("Click on Timesheets dropdown");
+		driver.findElement(By.xpath("//a[normalize-space()='Timesheet']")).click();
+		log.info("Click on Timesheet");
+		log.pass("Successfully navigate to the timesheet page");
+
+		// Implementing JavaScript Executor for handling dropdown
+		WebElement taskname_table = driver.findElement(By.xpath("//td//following::select"));
+		((JavascriptExecutor) driver).executeScript("arguments[0].click();", taskname_table);
+		Select sc = new Select(taskname_table);
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
+
+		sc.selectByVisibleText("QA");
+		log.info("Using Select class we can handle dropdown Select Task");
+		log.pass("Successfully select the Task Name");
+
+		driver.findElement(By.xpath("//input[@maxlength='50']")).sendKeys("Automation Testing");
+		log.info("Input the description in Notes textbox");
+		log.pass("Successfully input the description in the textbox");
+
+		driver.findElement(By.xpath("//input[@maxlength='5']")).sendKeys("8");
+		log.info("Input the working hours in Textbox");
+		log.pass("Successfully input the working hours in the textbox");
+
+		driver.findElement(By.xpath(
+				"/html/body/app-root/app-layout/app-vertical/div/div/div/app-timesheet/div[1]/div/div/div[2]/div/table/tbody/tr[1]/td[1]/input"))
+				.click();
+		log.info("Click on 'IsBillable' checkbox");
+		log.pass("Successfully click on 'IsBillable' checkbox");
+
+		driver.findElement(By.xpath("//button[normalize-space()='Submit']")).click();
+		log.info("Click on Submit button");
+		log.pass("Successfully click on Submit button");
+
+		driver.close();
+		log.pass("Successfully close the browser");
+		log.pass("Successfully Resubmit the Timesheet with click on 'IsBillable' checkbox");
+	}	 
 }
