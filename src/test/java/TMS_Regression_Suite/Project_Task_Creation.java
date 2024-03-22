@@ -605,5 +605,21 @@ public class Project_Task_Creation extends Base_Page_TMS {
 		driver.close();
 		log.pass("Successfully close the browser");
 		log.pass("Successfully Resubmit the Timesheet with click on 'IsBillable' checkbox");
-	}	 
+	}	
+	
+	/* Approve_ResubmitTimesheet(): This method is used to Approve the resubmitted Timesheet.
+	   
+	 * Steps:
+     *   1. Open the browser
+     *   2. Login the application(Approver)
+     *   3. Successfully open Timesheet Summary page
+     *   4. Mouse over to 'Team' radio button
+     *   5. Click on 'Team' radio button
+     *   6. Mouse over to project date and click on that
+     *   7. Popup window should be open
+     *   8. Mouse over to Approve button
+     *   9. Click on Approve button
+     *  10. Successfully Approved the Timesheet
+     *  11. Close the browser
+	   */
 }
