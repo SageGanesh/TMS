@@ -416,13 +416,19 @@ public class Project_Task_Creation extends Base_Page_TMS {
 		driver.findElement(By.xpath("//button[@type='submit']")).click();
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
 		log.info("Login with valid credentials");
+		log.fail("Using valid credentials unable to login the application");
 		log.pass("Successfully login the application");
 
 		driver.findElement(By.xpath("//i[@class='bx bx-calendar-check ng-star-inserted']")).click();
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
 		log.info("Click on Timesheets dropdown");
+		log.fail("Unable to click on Timesheets dropdown");
+		log.pass("Successfully click on Timesheets dropdown");
+		
+		
 		driver.findElement(By.xpath("//a[normalize-space()='Timesheet']")).click();
 		log.info("Click on Timesheet");
+		log.fail("Unable to click on Timesheet");
 		log.pass("Successfully navigate to the timesheet page");
 
 		// Implementing JavaScript Executor for handling dropdown
@@ -433,22 +439,27 @@ public class Project_Task_Creation extends Base_Page_TMS {
 
 		select.selectByVisibleText("QA");
 		log.info("Using Select class handle the dropdown for Task Name");
+		log.fail("Unable to click on Task Name");
 		log.pass("Successfully select the Task Name");
 
 		driver.findElement(By.xpath("//input[@maxlength='50']")).sendKeys("Automation Testing");
 		log.info("Input the description in Notes text box");
+		log.fail("Unable to Input the description in the textbox");
 		log.pass("Succuessfully Input the description in the textbox");
 
 		driver.findElement(By.xpath("//input[@maxlength='5']")).sendKeys("8");
 		log.info("Input the working hours in the textbox");
+		log.fail("Unable to input the working hours in the textbox");
 		log.pass("Succuessfully Input the working hours in the textbox");
 
 		driver.findElement(By.xpath("//button[normalize-space()='Submit']")).click();
 		log.info("Click on submit button");
+		log.fail("Unable to click on submit button");
 		log.pass("Successfully click on Submit button");
 		
 		driver.close();
 		log.pass("Successfully close the browser.");
+		log.fail("Unable to close the browser");
 		log.pass("Successfully submit the timesheet without clicking on IsBillable toggle button");
 
 	}
@@ -488,21 +499,25 @@ public class Project_Task_Creation extends Base_Page_TMS {
 		driver.findElement(By.xpath("//button[@type='submit']")).click();
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
 		log.info("Login with valid credentials");
+		log.fail("Using valid credentials unable to login the application");
 		log.pass("Successfully login the application");
 
 		driver.findElement(By.xpath("//input[@id='inlineRadio2']")).click();
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
 		log.info("Click on Team radio button");
+		log.fail("Unable to click on 'Team' radio button");
 		log.pass("Successfully click on Team radio button");
 
 		driver.findElement(By.xpath("//a[normalize-space()='03/04/2024 - 03/17/2024']")).click();
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(1));
 		log.info("Mouse over to Project dates and click on Dates");
+		log.fail("Unable to click on Project dates");
 		log.pass("Successfully click on project dates");
 
 		driver.findElement(By.xpath("//button[normalize-space()='Reject']")).click();
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(1));
 		log.info("Click on Reject button present on Popup window");
+		log.fail("Unable to click on Reject button");
 		log.pass("Successfully click on Reject button");
 
 		// Implement select class for handling the dropdown
@@ -514,23 +529,28 @@ public class Project_Task_Creation extends Base_Page_TMS {
 		select.selectByVisibleText("\"Is Billable\" not checked");
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
 		log.info("Using Select class handling the Rejecton reason dropdown");
+		log.fail("Unable to click on Rejection reason dropdown");
 		log.pass("Successfully click on Rejection reason dropdown");
 
 		driver.findElement(By.xpath("//textarea[@maxlength='200']")).sendKeys("Is Billable toggle is not selected");
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
 		log.info("Input the Comment for the Timsheet Rejection");
+		log.fail("Unable to input the rejection comment");
 		log.pass("Successfully input the rejection comment");
 
 		driver.findElement(By.xpath("//div[@class='d-flex align-items-end flex-column mt-2']//div")).click();
 		log.info("Click on Reject button");
+		log.fail("Unable to click on Reject button");
 		log.pass("Successfully click on Reject button");
 
 		driver.findElement(By.xpath("//button[normalize-space()='Close']")).click();
 		log.info("Click on Close button");
+		log.fail("Unable to click on Close button");
 		log.pass("Successfully click on Close button");
 
 		driver.close();
 		log.pass("Successfully close the browser.");
+		log.fail("Unable to close the browser");
 		log.pass("Successfully Reject the Timesheet with Reason and Comment");
 	}
 
@@ -565,13 +585,18 @@ public class Project_Task_Creation extends Base_Page_TMS {
 		driver.findElement(By.xpath("//button[@type='submit']")).click();
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
 		log.info("Login with valid credentials");
+		log.fail("Unable to login with valid credentials");
 		log.pass("Successfully login the application");
 
 		driver.findElement(By.xpath("//i[@class='bx bx-calendar-check ng-star-inserted']")).click();
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
 		log.info("Click on Timesheets dropdown");
+		log.fail("Unable to click on Timesheets dropdown");
+		log.pass("Successfully click on Timesheets dropdown");
+		
 		driver.findElement(By.xpath("//a[normalize-space()='Timesheet']")).click();
 		log.info("Click on Timesheet");
+		log.fail("Unable to click on Timesheet");
 		log.pass("Successfully navigate to the timesheet page");
 
 		// Implementing JavaScript Executor for handling dropdown
@@ -582,44 +607,34 @@ public class Project_Task_Creation extends Base_Page_TMS {
 
 		sc.selectByVisibleText("QA");
 		log.info("Using Select class we can handle dropdown Select Task");
+		log.fail("Unable to click on Task Name");
 		log.pass("Successfully select the Task Name");
 
 		driver.findElement(By.xpath("//input[@maxlength='50']")).sendKeys("Automation Testing");
 		log.info("Input the description in Notes textbox");
+		log.fail("Unable to Input the description in the textbox");
 		log.pass("Successfully input the description in the textbox");
 
 		driver.findElement(By.xpath("//input[@maxlength='5']")).sendKeys("8");
 		log.info("Input the working hours in Textbox");
+		log.fail("Unable to input the working hours in the textbox");
 		log.pass("Successfully input the working hours in the textbox");
 
 		driver.findElement(By.xpath(
 				"/html/body/app-root/app-layout/app-vertical/div/div/div/app-timesheet/div[1]/div/div/div[2]/div/table/tbody/tr[1]/td[1]/input"))
 				.click();
 		log.info("Click on 'IsBillable' checkbox");
+		log.fail("Unable to click on 'IsBillable' checkbox");
 		log.pass("Successfully click on 'IsBillable' checkbox");
 
 		driver.findElement(By.xpath("//button[normalize-space()='Submit']")).click();
 		log.info("Click on Submit button");
+		log.fail("Unable to click on Submit button");
 		log.pass("Successfully click on Submit button");
 
 		driver.close();
 		log.pass("Successfully close the browser");
+		log.fail("Unable to close the browser");
 		log.pass("Successfully Resubmit the Timesheet with click on 'IsBillable' checkbox");
 	}	
-	
-	/* Approve_ResubmitTimesheet(): This method is used to Approve the resubmitted Timesheet.
-	   
-	 * Steps:
-     *   1. Open the browser
-     *   2. Login the application(Approver)
-     *   3. Successfully open Timesheet Summary page
-     *   4. Mouse over to 'Team' radio button
-     *   5. Click on 'Team' radio button
-     *   6. Mouse over to project date and click on that
-     *   7. Popup window should be open
-     *   8. Mouse over to Approve button
-     *   9. Click on Approve button
-     *  10. Successfully Approved the Timesheet
-     *  11. Close the browser
-	   */
 }
