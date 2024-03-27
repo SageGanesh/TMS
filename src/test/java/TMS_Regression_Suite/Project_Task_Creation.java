@@ -419,8 +419,10 @@ public class Project_Task_Creation extends Base_Page_TMS {
 		log.pass("Successfully login the application");
 
 		driver.findElement(By.xpath("//i[@class='bx bx-calendar-check ng-star-inserted']")).click();
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
+		Thread.sleep(2000);
 		log.info("Click on Timesheets dropdown");
+		log.pass("Successfully click on Timesheets dropdown");
+		
 		driver.findElement(By.xpath("//a[normalize-space()='Timesheet']")).click();
 		log.info("Click on Timesheet");
 		log.pass("Successfully navigate to the timesheet page");
@@ -429,7 +431,7 @@ public class Project_Task_Creation extends Base_Page_TMS {
 		WebElement taskname_table = driver.findElement(By.xpath("//td//following::select"));
 		((JavascriptExecutor) driver).executeScript("arguments[0].click();", taskname_table);
 		Select select = new Select(taskname_table);
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
+		Thread.sleep(1000);
 
 		select.selectByVisibleText("QA");
 		log.info("Using Select class handle the dropdown for Task Name");
@@ -491,17 +493,17 @@ public class Project_Task_Creation extends Base_Page_TMS {
 		log.pass("Successfully login the application");
 
 		driver.findElement(By.xpath("//input[@id='inlineRadio2']")).click();
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
+		Thread.sleep(2000);
 		log.info("Click on Team radio button");
 		log.pass("Successfully click on Team radio button");
 
 		driver.findElement(By.xpath("//a[normalize-space()='03/04/2024 - 03/17/2024']")).click();
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(1));
+		Thread.sleep(1000);
 		log.info("Mouse over to Project dates and click on Dates");
 		log.pass("Successfully click on project dates");
 
 		driver.findElement(By.xpath("//button[normalize-space()='Reject']")).click();
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(1));
+		Thread.sleep(1000);
 		log.info("Click on Reject button present on Popup window");
 		log.pass("Successfully click on Reject button");
 
@@ -509,15 +511,15 @@ public class Project_Task_Creation extends Base_Page_TMS {
 		WebElement rejection_reasondrp = driver.findElement(By.xpath("//select[@id='form-rejectionreason']"));
 		((JavascriptExecutor) driver).executeScript("arguments[0].click();", rejection_reasondrp);
 		Select select = new Select(rejection_reasondrp);
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(1));
+		Thread.sleep(1000);
 
 		select.selectByVisibleText("\"Is Billable\" not checked");
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
+		Thread.sleep(2000);
 		log.info("Using Select class handling the Rejecton reason dropdown");
 		log.pass("Successfully click on Rejection reason dropdown");
 
 		driver.findElement(By.xpath("//textarea[@maxlength='200']")).sendKeys("Is Billable toggle is not selected");
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
+		Thread.sleep(2000);
 		log.info("Input the Comment for the Timsheet Rejection");
 		log.pass("Successfully input the rejection comment");
 
@@ -543,7 +545,7 @@ public class Project_Task_Creation extends Base_Page_TMS {
 	 *   3. Mouse over toTimesheets 
 	 *   4. Click on Timesheet 
 	 *   5. Select the Project using Project dropdown
-	 *   6. Click on Add Task button // 
+	 *   6. Click on Add Task button  
 	 *   7. Clicking on "Is Billable" Checkbox 
 	 *   8. Select the Task Name using Task Name dropdown
 	 *   9. Input the description in Notes Textbox
@@ -553,7 +555,7 @@ public class Project_Task_Creation extends Base_Page_TMS {
 	 * 
 	 */
 
-	@Test(priority = 8, description = "Resubmit the Timesheet With IsBillable Checkbox.")
+	@Test(priority = 8, description = "Resubmit the Timesheet With 'IsBillable' Checkbox.")
 	public void Resubmit_TimesheetWith_Isbillable() throws InterruptedException {
 		ExtentTest log = extent.createTest("Resubmit the Timesheet with clicking on 'IsBillable' checkbox")
 				.assignCategory("Resubmit_Timesheet");
@@ -568,8 +570,10 @@ public class Project_Task_Creation extends Base_Page_TMS {
 		log.pass("Successfully login the application");
 
 		driver.findElement(By.xpath("//i[@class='bx bx-calendar-check ng-star-inserted']")).click();
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
+		Thread.sleep(1000);
 		log.info("Click on Timesheets dropdown");
+		log.pass("Successfully Click on Timesheets dropdown");
+		
 		driver.findElement(By.xpath("//a[normalize-space()='Timesheet']")).click();
 		log.info("Click on Timesheet");
 		log.pass("Successfully navigate to the timesheet page");
@@ -578,7 +582,7 @@ public class Project_Task_Creation extends Base_Page_TMS {
 		WebElement taskname_table = driver.findElement(By.xpath("//td//following::select"));
 		((JavascriptExecutor) driver).executeScript("arguments[0].click();", taskname_table);
 		Select sc = new Select(taskname_table);
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
+		Thread.sleep(2000);
 
 		sc.selectByVisibleText("QA");
 		log.info("Using Select class we can handle dropdown Select Task");
@@ -605,5 +609,5 @@ public class Project_Task_Creation extends Base_Page_TMS {
 		driver.close();
 		log.pass("Successfully close the browser");
 		log.pass("Successfully Resubmit the Timesheet with click on 'IsBillable' checkbox");
-	}	 
+	}
 }
