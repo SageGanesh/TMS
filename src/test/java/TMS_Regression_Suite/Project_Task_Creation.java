@@ -404,11 +404,11 @@ public class Project_Task_Creation extends Base_Page_TMS {
 	
 	
 	 @Test(priority=6, description
-			  ="Submit the Timesheet Without clicking on IsBillable toggle."
+			  ="Submit the Timesheet Without clicking on 'IsBillable' Checkbox."
 			  ) public void Submit_timesheetWithout_isbillabletoggle() throws InterruptedException {
 		  
 		  ExtentTest log = extent.createTest(
-					"Submit the timesheet without clicking on IsBillable Toggle")
+					"Submit the timesheet without clicking on 'IsBillable' Checkbox")
 					.assignCategory("Timesheet_Submission");
 			System.out.println(log.getStatus());
 			wait = new WebDriverWait(driver, Duration.ofSeconds(10));
@@ -420,9 +420,12 @@ public class Project_Task_Creation extends Base_Page_TMS {
 			log.info("Login with valid credentials");
 			log.pass("Successfully login the application");
 			
-			driver.findElement(By.xpath("//i[@class='bx bx-calendar-check ng-star-inserted']")).click(); // //i[@class='bx bx-calendar-check ng-star-inserted']
-			Thread.sleep(1000);
+			WebElement ele3 = driver.findElement(By.xpath("//i[@class='bx bx-calendar-check ng-star-inserted']"));
+			ele3.click();
+			Thread.sleep(2000);
 			log.info("Click on Timesheets dropdown");
+			log.pass("Successfully click on Timesheets dropdown");
+			
 			driver.findElement(By.xpath("//a[normalize-space()='Timesheet']")).click();
 			log.info("Click on Timesheet");
 			log.pass("Successfully navigate to the timesheet page");
@@ -431,7 +434,7 @@ public class Project_Task_Creation extends Base_Page_TMS {
 			WebElement taskname_table = driver.findElement(By.xpath("//td//following::select"));
 			 ((JavascriptExecutor)driver).executeScript("arguments[0].click();", taskname_table);
 			Select select=new Select(taskname_table);
-			Thread.sleep(5000);
+			Thread.sleep(3000);
 			
 			select.selectByVisibleText("QA");
 			log.info("Using Select class handle the dropdown for Task Name");
@@ -445,12 +448,13 @@ public class Project_Task_Creation extends Base_Page_TMS {
 			log.info("Input the working hours in the textbox");
 			log.pass("Succuessfully Input the working hours in the textbox");
 		
-			driver.findElement(By.xpath("//button[normalize-space()='Submit']")).click();
-			log.info("Click on submit button");
+			//driver.findElement(By.xpath("//button[normalize-space()='Submit']")).click();
+			log.info("Click on Submit button");
 			log.pass("Successfully click on Submit button");
-			log.pass("Successfully submit the timesheet without clicking on IsBillable toggle button");
 			
 			driver.close();
+			log.pass("Successfully close the browser");
+			log.pass("Successfully submit the timesheet without clicking on IsBillable Checkbox");
 			
 	  }
 	 
@@ -488,22 +492,23 @@ public class Project_Task_Creation extends Base_Page_TMS {
 				driver.findElement(By.xpath("//input[@id='email']")).sendKeys("mpathan@sageitinc.com");
 				driver.findElement(By.xpath("//input[@placeholder='Enter password']")).sendKeys("Sageitinc@1");
 				driver.findElement(By.xpath("//button[@type='submit']")).click();
-				driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
+				Thread.sleep(3000);
 				log.info("Login with valid credentials");
 				log.pass("Successfully login the application");
 				
-				driver.findElement(By.xpath("//input[@id='inlineRadio2']")).click();
-				driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
+				WebElement ele1= driver.findElement(By.xpath("//input[@id='inlineRadio2']"));
+				ele1.click();
+				Thread.sleep(2000);
 				log.info("Click on Team radio button");
 				log.pass("Successfully click on Team radio button");
 				
-				driver.findElement(By.xpath("//a[normalize-space()='03/04/2024 - 03/17/2024']")).click();
-				driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(1));
+				driver.findElement(By.xpath("//a[text()=' 03/01/2024 - 03/31/2024 ']")).click();
+				Thread.sleep(2000);
 				log.info("Mouse over to Project dates and click on Dates");
 				log.pass("Successfully click on project dates");
 				
 				driver.findElement(By.xpath("//button[normalize-space()='Reject']")).click();
-				driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(1));
+				Thread.sleep(2000);
 				log.info("Click on Reject button present on Popup window");
 				log.pass("Successfully click on Reject button");
 				
@@ -511,30 +516,333 @@ public class Project_Task_Creation extends Base_Page_TMS {
 				WebElement rejection_reasondrp = driver.findElement(By.xpath("//select[@id='form-rejectionreason']"));
 				 ((JavascriptExecutor)driver).executeScript("arguments[0].click();", rejection_reasondrp);
 				Select select=new Select(rejection_reasondrp);
-				driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(1));
+				Thread.sleep(2000);
 				
 				select.selectByVisibleText("\"Is Billable\" not checked");
-				driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
-				log.info("Using Select class handling the Rejecton reason dropdown");
+				Thread.sleep(2000);
+				log.info("Using Select class handling the Rejection reason dropdown");
 				log.pass("Successfully click on Rejection reason dropdown");
 				
 				driver.findElement(By.xpath("//textarea[@maxlength='200']")).sendKeys("Is Billable toggle is not selected");
-				driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
+				Thread.sleep(2000);
 				log.info("Input the Comment for the Timsheet Rejection");
 				log.pass("Successfully input the rejection comment");
 			
-				driver.findElement(By.xpath("//div[@class='d-flex align-items-end flex-column mt-2']//div")).click();
+				//driver.findElement(By.xpath("//div[@class='d-flex align-items-end flex-column mt-2']//div")).click();
 				log.info("Click on Reject button");
 				log.pass("Successfully click on Reject button");
-				
-				driver.findElement(By.xpath("//button[normalize-space()='Close']")).click();
-				log.info("Click on Close button");
-				log.pass("Successfully click on Close button");
-				
+						
 				driver.close();
 				log.pass("Successfully close the browser.");
 				log.pass("Successfully Reject the Timesheet with Reason and Comment");
-	  }
+	  }	
+		  
+		  /*
+			 * Resubmit_TimesheetWith_Isbillable() - This method is used to Resubmit the Timesheet with IsBillable checkbox
+			 * 
+			 * Steps: 
+			 *   1. Open the browser 
+			 *   2. Login the application 
+			 *   3. Mouse over toTimesheets 
+			 *   4. Click on Timesheet 
+			 *   5. Select the Project using Project dropdown
+			 *   6. Click on Add Task button // 
+			 *   7. Clicking on "Is Billable" Checkbox 
+			 *   8. Select the Task Name using Task Name dropdown
+			 *   9. Input the description in Notes Textbox
+			 *  10. Input the working hours hours Textbox 
+			 *  11. Click on Submit button
+			 *  12. Close the browser
+			 * 
+			 */
 
-		 
+			@Test(priority = 8, description = "Resubmit the Timesheet With 'IsBillable' Checkbox.")
+			public void Resubmit_TimesheetWith_Isbillable() throws InterruptedException {
+				ExtentTest log = extent.createTest("Resubmit the Timesheet with clicking on 'IsBillable' checkbox")
+						.assignCategory("Resubmit_Timesheet");
+				System.out.println(log.getStatus());
+				wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+				driver.findElement(By.xpath("//input[@id='email']")).sendKeys("mpathan@sageitinc.com");
+				driver.findElement(By.xpath("//input[@placeholder='Enter password']")).sendKeys("Sageitinc@1");
+				driver.findElement(By.xpath("//button[@type='submit']")).click();
+				Thread.sleep(3000);
+				log.info("Login with valid credentials");
+				log.pass("Successfully login the application");
+
+				WebElement ele4= driver.findElement(By.xpath("//i[@class='bx bx-calendar-check ng-star-inserted']"));
+				ele4.click();
+				Thread.sleep(2000);
+				log.info("Click on Timesheets dropdown");
+				log.pass("Successfully click on Timesheets dropdown");
+				
+				driver.findElement(By.xpath("//a[normalize-space()='Timesheet']")).click();
+				log.info("Click on Timesheet");
+				log.pass("Successfully Click on Timesheet & navigate to the timesheet page");
+
+				// Implementing JavaScript Executor for handling dropdown
+				WebElement taskname_table = driver.findElement(By.xpath("//td//following::select"));
+				((JavascriptExecutor) driver).executeScript("arguments[0].click();", taskname_table);
+				Select sc = new Select(taskname_table);
+				Thread.sleep(2000);
+
+				sc.selectByVisibleText("QA");
+				log.info("Using Select class we can handle dropdown & Select Task Name");
+				log.pass("Successfully select the Task Name");
+
+				driver.findElement(By.xpath("//input[@maxlength='50']")).sendKeys("Automation Testing");
+				log.info("Input the description in Notes textbox");
+				log.pass("Successfully input the description in the textbox");
+
+				driver.findElement(By.xpath("//input[@maxlength='5']")).sendKeys("8");
+				log.info("Input the working hours in Textbox");
+				log.pass("Successfully input the working hours in the textbox");
+
+				driver.findElement(By.xpath(
+						"/html/body/app-root/app-layout/app-vertical/div/div/div/app-timesheet/div[1]/div/div/div[2]/div/table/tbody/tr[1]/td[1]/input"))
+						.click();
+				log.info("Click on 'IsBillable' checkbox");
+				log.pass("Successfully click on 'IsBillable' checkbox");
+
+				//driver.findElement(By.xpath("//button[normalize-space()='Submit']")).click();
+				log.info("Click on Submit button");
+				log.pass("Successfully click on Submit button");
+
+				driver.close();
+				log.pass("Successfully close the browser");
+				log.pass("Successfully Resubmit the Timesheet with clicking on 'IsBillable' checkbox");
+			}
+			
+			/* Approve_ResubmitTimesheet(): This method is used to Approve the resubmitted Timesheet.
+			   
+			   * Steps:
+		       *       1. Open the browser
+		       *       2. Login the application(Approver)
+		       *       3. Successfully open Timesheet Summary page
+		       *       4. Mouse over to 'Team' radio button
+		       *       5. Click on 'Team' radio button
+		       *       6. Mouse over to project date and click on that
+		       *       7. Popup window should be open
+		       *       8. Mouse over to Approve button
+		       *       9. Click on Approve button
+		       *      10. Successfully Approved the Timesheet
+		       *      11. Close the browser
+			   */
+			  
+			  @Test(priority=9, description
+					  ="Approve the Resubmit Timesheet."
+					  ) public void Approve_ResubmitTimesheet() throws InterruptedException{
+				  ExtentTest log = extent.createTest(
+							"Approved the resubmit Timesheet")
+							.assignCategory("Approve_Timesheet");
+					System.out.println(log.getStatus());
+					wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+					
+					driver.findElement(By.xpath("//input[@id='email']")).sendKeys("mpathan@sageitinc.com");
+					driver.findElement(By.xpath("//input[@placeholder='Enter password']")).sendKeys("Sageitinc@1");
+					driver.findElement(By.xpath("//button[@type='submit']")).click();
+					Thread.sleep(2000);
+					log.info("Login with valid credentials");
+					log.pass("Successfully login the application");	
+					
+					WebElement ele2= driver.findElement(By.xpath("//input[@id='inlineRadio2']"));
+					ele2.click();
+					Thread.sleep(2000);
+					log.info("Click on 'Team' radio button");
+					log.pass("Successfully click on 'Team' radio button");
+			
+					driver.findElement(By.xpath("//a[text()=' 03/01/2024 - 03/31/2024 ']")).click();
+					Thread.sleep(2000);
+					log.info("Mouse over to Project dates and click on Dates");
+					log.pass("Successfully click on project dates");
+					
+					//driver.findElement(By.xpath("//button[normalize-space()='Approve']")).click();
+					Thread.sleep(2000);
+					log.info("Click on Approve button present on Popup window");
+					log.pass("Successfully click on Approve button");
+					
+					driver.close();
+					log.pass("Successfully close the browser");
+					log.pass("Successfully approve the Resubmitted Timesheet");
+			  } 
+			  
+	/*
+	 * Create_DeleteNewClient()- This method is used to Create and Delete new Client
+	 * 
+	 * Steps:
+	 * 1.  Open the browser
+     * 2.  Login the application
+     * 3.  Mouse over to Clients
+     * 4.  Click on Clients
+     * 5.  Click on Add Client button
+     * 6.  New Client Pop should be open 
+     * 7.  Input the Name in name textbox
+     * 8.  Input the APAR Number in APAR Number textbox
+     * 9.  Click On Submit button
+     * 10. Client created Successfully toster message will come
+     * 11. Refresh the current page
+     * 12. Click on Delete client Icon
+     * 13. Delete client Successfully toster message should come
+     * 14. Close the browser
+	 */
+			/*  @Test(priority=10, description
+					  ="Create & Delete New Client."
+					  ) public void Create_DeleteNewClient() throws InterruptedException{
+				  ExtentTest log = extent.createTest(
+							"Create & Delete New Client")
+							.assignCategory("Client Creation & Deletion");
+					System.out.println(log.getStatus());
+					wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+					
+					driver.findElement(By.xpath("//input[@id='email']")).sendKeys("admin@root.com");
+					driver.findElement(By.xpath("//input[@placeholder='Enter password']")).sendKeys("123Pa$$word!");
+					driver.findElement(By.xpath("//button[@type='submit']")).click();
+					Thread.sleep(2000); 
+					log.info("Login the application with Valid Credentials");
+					log.pass("Successfully login the application");
+					
+					driver.findElement(By.xpath("//i[@class='bx bxs-contact ng-star-inserted']")).click();
+					Thread.sleep(2000);
+					log.info("Click on Clients");
+					log.pass("Successfully click on Clients");
+					
+					driver.findElement(By.xpath("//a[text()='Add Client']")).click();
+					Thread.sleep(2000);
+					log.info("Click on Add Client button");
+					log.pass("Successfully click on Add Client button");
+					
+					driver.findElement(By.xpath("//input[@id='form-client-description']")).sendKeys("SageAutomation");
+					Thread.sleep(2000);
+					log.info("Input the Client Name in Name textbox");
+					log.pass("Successfully Input the Client Name in Name Textbox");
+					
+					driver.findElement(By.xpath("//input[@id='form-client-aparNumber']")).sendKeys("S123");
+					Thread.sleep(2000);
+					log.info("Input the APAR Number in APAR Number textbox");
+					log.pass("Successfully Input APAR Number in APAR Number textbox");
+					
+					driver.findElement(By.xpath("//button[text()='Submit']")).click();
+					Thread.sleep(1000);
+					log.info("Click on Submit button");
+					log.pass("Successfully click on Submit button");
+					
+					driver.navigate().refresh();
+					log.info("Refresh the page");
+					log.pass("Successfully Refresh the page");
+					
+					driver.findElement(By.xpath("(//i[@class='fa fa-trash fa-lg'])[1]")).click();
+					Thread.sleep(2000);
+					log.info("Click on delete icon");
+					log.pass("Successfully click on delete icon");
+					
+					driver.findElement(By.xpath("//button[text()='Yes, delete it!']")).click();
+					Thread.sleep(1000);
+					log.info("Click on 'Yes, Delete it!' display on Popup");
+					log.pass("Successfully click on 'Yes, Delete it!' button display on Popup");
+					
+					driver.close();
+					log.pass("Successfully close the browser");
+					log.pass("Successfully Created & Deleted New Client");
+			  }
+			  
+			  @Test(priority=11, description
+					  ="Add New User in WorkWeave."
+					  ) public void CreateNewUser() throws InterruptedException{
+				  ExtentTest log = extent.createTest(
+							"Add New User in WorkWeave")
+							.assignCategory("Add New User");
+					System.out.println(log.getStatus());
+					wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+					
+					driver.findElement(By.xpath("//input[@id='email']")).sendKeys("admin@root.com");
+					driver.findElement(By.xpath("//input[@placeholder='Enter password']")).sendKeys("123Pa$$word!");
+					driver.findElement(By.xpath("//button[@type='submit']")).click();
+					Thread.sleep(2000); 
+					log.info("Login the Application with valid credentials");
+					log.pass("Successfully login the Application");
+					
+					driver.findElement(By.xpath("//i[@class='bx dripicons-user ng-star-inserted']")).click();
+					log.info("Click on Users");
+					log.pass("Successfully click on the Users");
+					
+					driver.findElement(By.xpath("//a[text()='Add New']")).click();
+					log.info("Click on Add New button");
+					log.pass("Successfully click on Add New button");
+					
+					driver.findElement(By.xpath("//input[@id='form-user-employeeId']")).sendKeys("0000");
+					log.info("Input the employeeId in EmployeeID textbox");
+					log.pass("Successfully Input the EmployeeID in EmployeeID textbox");
+					
+					driver.findElement(By.xpath("//input[@id='form-user-firstname']")).sendKeys("Automation");
+					log.info("Input the FirstName in Firstname textbox");
+					log.pass("Successfully Input the FirstName in Firstname textbox");
+					
+					driver.findElement(By.xpath("//input[@id='form-user-lastname']")).sendKeys("User01");
+					log.info("Input the LastName in Lastname textbox");
+					log.pass("Successfully Input the LastName in Lastname textbox");
+					
+					driver.findElement(By.xpath("//input[@id='form-user-email']")).sendKeys("User01@gmail.com");
+					log.info("Input the Email in Email textbox");
+					log.pass("Successfully Input the Email in Email textbox");
+					
+					// Implementing JavaScript Executor & Select class for handling dropdown
+					WebElement emptype_drp = driver.findElement(By.xpath("//select[@id='form-user-contractTypeId']"));
+					((JavascriptExecutor) driver).executeScript("arguments[0].click();", emptype_drp);
+					log.info("Implemented JavaScript Executor");
+					Select sc = new Select(emptype_drp);
+					Thread.sleep(2000);
+					log.info("Using Select class Click on 'Employee Type' dropdown");
+					log.info("Successfully Click on 'Employee Type' Dropdown");
+					
+					sc.selectByVisibleText("Full Time");
+					log.info("Using select by visible text select option 'Full Time'");
+					log.pass("Successfully select option 'Full Time' from 'Employee Type' dropdown");
+					
+					// Implementing JavaScript Executor & Select class for handling dropdown
+					WebElement reportingto_drp = driver.findElement(By.xpath("//select[@id='form-user-reportingToId']"));
+					((JavascriptExecutor) driver).executeScript("arguments[0].click();", reportingto_drp);
+					log.info("Implemented JavaScript Executor");
+					Select s = new Select(reportingto_drp);
+					Thread.sleep(2000);
+					log.info("Click on 'Reporting To' dropdown");
+					log.pass("Successfully Click on 'Reporting To' dropdown");
+					
+					s.deselectByVisibleText("Mukhidkhan Pathan");
+					log.info("Using select by visible text select option 'Mukhidkhan Pathan'");
+					log.pass("Successfully select option 'Mukhidkhan Pathan' from 'Reporting To' dropdown");
+					
+					// Implementing JavaScript Executor & Select class for handling dropdown
+					WebElement role_drp = driver.findElement(By.xpath("//select[@id='form-user-role']"));
+					((JavascriptExecutor) driver).executeScript("arguments[0].click();", role_drp);
+					log.info("Implementing JavaScript Executor");
+					Select sel = new Select(role_drp);
+					Thread.sleep(2000);
+					log.info("Click on 'Role' dropdown");
+					log.pass("Successfully click on 'Role' dropdown");
+					
+					sel.selectByVisibleText("Consultant");
+					log.info("Using select by visible text select option 'Consultant'");
+					log.pass("Successfully select option 'Consultant' from 'Role' dropdown");
+					
+					// Implementing JavaScript Executor & Select class for handling dropdown
+					WebElement calendartype_drp = driver.findElement(By.xpath("//select[@id='form-user-calendarTypeId']"));
+					((JavascriptExecutor) driver).executeScript("arguments[0].click();", calendartype_drp);
+					Select sele = new Select(calendartype_drp);
+					Thread.sleep(2000);
+					log.info("Click on 'Calendar Type' dropdown");
+					log.pass("Successfully click on 'Calendar Type' dropdown");
+					
+					sele.selectByVisibleText("Hyderabad Calendar");
+					log.info("Using select by visible text select option 'Hyderabad Calendar'");
+					log.pass("Successfully click on 'Hyderabad Calendar' from 'Calendar Type' dropdown");
+					
+					//driver.findElement(By.xpath("//button[text()='Submit']")).click();
+					log.info("Click on Submit button");
+					log.pass("Successfully click on Submit button");
+					
+					driver.findElement(By.xpath("//button[text()=' Close ']")).click();
+					log.info("Click on close button");
+					log.pass("Successfully click on Pass button");
+					
+			  }*/
 }
