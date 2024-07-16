@@ -29,7 +29,6 @@ public class ONB_Regression_Suite extends Base_Page_TMS {
 		spark.config().setDocumentTitle("html_report");
 		spark.config().setTheme(Theme.STANDARD);
 		extent.attachReporter(spark);
-
 	}
 
 	@AfterTest
