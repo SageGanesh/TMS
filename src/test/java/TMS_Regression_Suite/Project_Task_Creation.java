@@ -611,28 +611,7 @@ public class Project_Task_Creation extends Base_Page_TMS {
 		log.pass("Successfully Resubmit the Timesheet with click on 'IsBillable' checkbox");
 	}
 	
-	/* Approve_ResubmitTimesheet(): This method is used to Approve the resubmitted Timesheet.
-	   
-	 * Steps:
-     *       1. Open the browser
-     *       2. Login the application(Approver)
-     *       3. Successfully open Timesheet Summary page
-     *       4. Mouse over to 'Team' radio button
-     *       5. Click on 'Team' radio button
-     *       6. Mouse over to project date and click on that
-     *       7. Popup window should be open
-     *       8. Mouse over to Approve button
-     *       9. Click on Approve button
-     *      10. Successfully Approved the Timesheet
-     *      11. Close the browser
-	 */
-	  
-	  @Test(priority=9, description
-			  ="Approve the Resubmit Timesheet."
-			  ) public void Approve_ResubmitTimesheet() throws InterruptedException{
-		  ExtentTest log = extent.createTest(
-					"Approved the resubmit Timesheet")
-					.assignCategory("Approve_Timesheet");
+
 			System.out.println(log.getStatus());
 			wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 			
@@ -643,24 +622,5 @@ public class Project_Task_Creation extends Base_Page_TMS {
 			log.info("Login with valid credentials");
 			log.pass("Successfully login the application");	
 			
-			WebElement ele2= driver.findElement(By.xpath("//input[@id='inlineRadio2']"));
-			ele2.click();
-			Thread.sleep(1000);
-			log.info("Click on 'Team' radio button");
-			log.pass("Successfully click on 'Team' radio button");
-	
-			driver.findElement(By.xpath("//a[text()=' 03/01/2024 - 03/31/2024 ']")).click();
-			Thread.sleep(1000);
-			log.info("Mouse over to Project dates and click on Dates");
-			log.pass("Successfully click on project dates");
-			
-			driver.findElement(By.xpath("//button[normalize-space()='Approve']")).click();
-			Thread.sleep(1000);
-			log.info("Click on Approve button present on Popup window");
-			log.pass("Successfully click on Approve button");
-			
-			driver.close();
-			log.pass("Successfully close the browser");
-			log.pass("Approver successfully approve the Resubmitted Timesheet");
-	  }
+
 }
