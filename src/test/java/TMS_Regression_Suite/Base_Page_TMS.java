@@ -47,7 +47,7 @@ WebElement ele;
 	      driver =new  ChromeDriver();
 		  driver.manage().window().maximize();
 		  driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(30));
-		  driver.get("https://onboardingqa.sageit.app/account/login");
+		  driver.get("https://vmp-qa.azurewebsites.net/account/login");
 		  driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
  }
 
