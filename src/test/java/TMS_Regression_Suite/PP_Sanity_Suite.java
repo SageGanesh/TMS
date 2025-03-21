@@ -5,6 +5,7 @@ import java.time.Duration;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -35,26 +36,26 @@ public class PP_Sanity_Suite extends Base_Page_TMS {
 		extent.flush();
 
 	}
-	
+
 	@Test(priority = 1, description = "Vendor Manager Add new Vendor")
 	public void AddnewVendor_By_VendorManager() throws InterruptedException {
 
-		ExtentTest log = extent.createTest("Vendor Manager Add new Vendor")
-				.assignCategory("Approve the RMG Onboard");
+		ExtentTest log = extent.createTest("Vendor Manager Add new Vendor").assignCategory("Approve the RMG Onboard");
 		System.out.println(log.getStatus());
 		wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-		//driver.findElement(By.xpath("//input[@id='email']")).clear();
+		// driver.findElement(By.xpath("//input[@id='email']")).clear();
 		driver.findElement(By.xpath("//input[@id='email']")).sendKeys("VendorManager@sageitinc.com");
-		//driver.findElement(By.xpath("//input[@placeholder='Enter password']")).clear();
+		// driver.findElement(By.xpath("//input[@placeholder='Enter
+		// password']")).clear();
 		driver.findElement(By.xpath("//input[@placeholder='Enter password']")).sendKeys("Sageitinc@1");
 		driver.findElement(By.xpath("//button[@type='submit']")).click();
-		Thread.sleep(3000);
+		Thread.sleep(5000);
 		log.info("Login with valid credentials");
 		log.pass("Successfully login the application");
 
 		WebElement ele1 = driver.findElement(By.xpath("//a[@href='/vendors']"));
 		ele1.click();
-		Thread.sleep(5000);
+		Thread.sleep(2000);
 		log.info("Click on Onboards Icon");
 		log.pass("Successfully click on Onboards Icon");
 
@@ -62,36 +63,78 @@ public class PP_Sanity_Suite extends Base_Page_TMS {
 		Thread.sleep(2000);
 		log.info("Click on Add New button");
 		log.pass("Successfully click on Add New button");
-		
-		driver.findElement(By.xpath("//input[@formcontrolname='vendorName']")).sendKeys("Ramesham");
-		log.info("Input the Recruiter Name in textbox");
+
+		driver.findElement(By.xpath("//input[@formcontrolname='vendorName']")).sendKeys("AutoVendor01");
+		log.info("Input the Vendor Name in textbox");
+		log.pass("Successfully input the Vendor Name in textbox");
+
+		driver.findElement(By.xpath("//input[@formcontrolname='vendorPOCName']")).sendKeys("AutoPOCVendor01");
+		log.info("Input the Vendor POC Name in textbox");
+		log.pass("Successfully input the Vendor POC Name in textbox");
+
+		driver.findElement(By.xpath("//input[@formcontrolname='contactNumber']")).sendKeys("9874563210");
+		log.info("Input the Contact Number in textbox");
 		log.pass("Successfully input the Recruiter Name in textbox");
-		
-		driver.findElement(By.xpath("//input[@formcontrolname='vendorPOCName']")).sendKeys("Ramesham");
-		log.info("Input the Recruiter Name in textbox");
-		log.pass("Successfully input the Recruiter Name in textbox");
-		
-		driver.findElement(By.xpath("//input[@formcontrolname='contactNumber']")).sendKeys("Ramesham");
-		log.info("Input the Recruiter Name in textbox");
-		log.pass("Successfully input the Recruiter Name in textbox");
-		
+
 		driver.findElement(By.xpath("//input[@formcontrolname='emailAddress']")).sendKeys("Ramesham");
-		log.info("Input the Recruiter Name in textbox");
-		log.pass("Successfully input the Recruiter Name in textbox");
-		
-		//Tier Level Drop down
-		
+		log.info("Input the Email Address in textbox");
+		log.pass("Successfully input the Email Address in textbox");
+
+		// Tier Level Drop down
+		// Implement select class for handling the dropdown
+		WebElement TierLevel_drp = driver.findElement(By.xpath("//select[@id='form-tierRulesId']"));
+		((JavascriptExecutor) driver).executeScript("arguments[0].click();", TierLevel_drp);
+		Select s = new Select(TierLevel_drp);
+		Thread.sleep(2000);
+
+		s.selectByIndex(0);
+		Thread.sleep(2000);
+		log.info("Using Select class handling the Tier Level dropdown");
+		log.pass("Successfully click on Tier Level dropdown and select the field");
+
 		// Country Drop down
-		
-		driver.findElement(By.xpath("//input[@formcontrolname='otherState']")).sendKeys("Ramesham");
-		log.info("Input the Recruiter Name in textbox");
-		log.pass("Successfully input the Recruiter Name in textbox");
-		
-		driver.findElement(By.xpath("//input[@formcontrolname='city']")).sendKeys("Ramesham");
-		log.info("Input the Recruiter Name in textbox");
-		log.pass("Successfully input the Recruiter Name in textbox");
+		// Implement select class for handling the dropdown
+		WebElement Country_drp = driver.findElement(By.xpath("//select[@id='form-country']"));
+		((JavascriptExecutor) driver).executeScript("arguments[0].click();", Country_drp);
+		Select st = new Select(Country_drp);
+		Thread.sleep(2000);
 
+		st.selectByIndex(1);
+		log.info("Using Select class handling the Country dropdown");
+		log.pass("Successfully click on Country dropdown and select the field");
 
+		driver.findElement(By.xpath("//input[@formcontrolname='otherState']")).sendKeys("Telangana");
+		log.info("Input the State in textbox");
+		log.pass("Successfully input the Country in textbox");
+		Thread.sleep(2000);
+
+		driver.findElement(By.xpath("//input[@formcontrolname='city']")).sendKeys("Hyderabad");
+		log.info("Input the City in textbox");
+		log.pass("Successfully input the City in textbox");
+		Thread.sleep(2000);
+
+		driver.findElement(By.xpath("//input[@formcontrolname='zipCode']")).sendKeys("123456");
+		log.info("Input the Zip Code in textbox");
+		log.pass("Successfully input the Zip Code in textbox");
+		Thread.sleep(2000);
+
+		// //ng-multiselect-dropdown[@id='clientAssigned']
+
+		// Client Assign Drop down
+		// Implement select class for handling the dropdown
+		WebElement Clients_drp = driver.findElement(By.xpath("(//span[@class='dropdown-btn'])[1]"));
+		((JavascriptExecutor) driver).executeScript("arguments[0].click();", Clients_drp);
+		Select client = new Select(Clients_drp);
+		Thread.sleep(2000);
+
+		client.selectByIndex(2);
+		log.info("Using Select class handling the Client Assign dropdown");
+		log.pass("Successfully click on Client Assign dropdown and select the field");
+
+		driver.findElement(By.xpath("//button[contains(text(),'Save')]")).click();
+		log.info("Click on Save button");
+		log.pass("Successfully click on save button");
+		Thread.sleep(2000);
 
 		driver.close();
 		log.pass("Successfully Close the browser");
