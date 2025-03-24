@@ -40,7 +40,7 @@ public class PP_Sanity_Suite extends Base_Page_TMS {
 	@Test(priority = 1, description = "Vendor Manager Add new Vendor")
 	public void AddnewVendor_By_VendorManager() throws InterruptedException {
 
-		ExtentTest log = extent.createTest("Vendor Manager Add new Vendor").assignCategory("Approve the RMG Onboard");
+		ExtentTest log = extent.createTest("Vendor Manager Add new Vendor").assignCategory("Add new Vendor");
 		System.out.println(log.getStatus());
 		wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 		// driver.findElement(By.xpath("//input[@id='email']")).clear();
@@ -56,8 +56,8 @@ public class PP_Sanity_Suite extends Base_Page_TMS {
 		WebElement ele1 = driver.findElement(By.xpath("//a[@href='/vendors']"));
 		ele1.click();
 		Thread.sleep(2000);
-		log.info("Click on Onboards Icon");
-		log.pass("Successfully click on Onboards Icon");
+		log.info("Click on Vendors Icon");
+		log.pass("Successfully click on Vendors Icon");
 
 		driver.findElement(By.xpath("//a[contains(text(),'Add New')]")).click();
 		Thread.sleep(2000);
@@ -87,8 +87,8 @@ public class PP_Sanity_Suite extends Base_Page_TMS {
 		Select s = new Select(TierLevel_drp);
 		Thread.sleep(2000);
 
-		s.selectByIndex(0);
-		Thread.sleep(2000);
+		s.selectByIndex(1);
+		// Thread.sleep(2000);
 		log.info("Using Select class handling the Tier Level dropdown");
 		log.pass("Successfully click on Tier Level dropdown and select the field");
 
@@ -99,7 +99,7 @@ public class PP_Sanity_Suite extends Base_Page_TMS {
 		Select st = new Select(Country_drp);
 		Thread.sleep(2000);
 
-		st.selectByIndex(1);
+		st.selectByIndex(2);
 		log.info("Using Select class handling the Country dropdown");
 		log.pass("Successfully click on Country dropdown and select the field");
 
@@ -138,6 +138,90 @@ public class PP_Sanity_Suite extends Base_Page_TMS {
 
 		driver.close();
 		log.pass("Successfully Close the browser");
-		log.pass("Successfully Approve the RMG onboards by Sales Manager.");
+		log.pass("Successfully Vendor Manager added new Vendor");
+	}
+
+	@Test(priority = 2, description = "Add New Applicant by Vendor")
+	public void AddnewApplicant_By_Vendor() throws InterruptedException {
+
+		ExtentTest log = extent.createTest("Add New Applicant by Vendor").assignCategory("App new Applicant");
+		System.out.println(log.getStatus());
+		wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+		driver.findElement(By.xpath("//input[@id='email']")).sendKeys("mpathan@sageitinc.com");
+		driver.findElement(By.xpath("//input[@placeholder='Enter password']")).sendKeys("Sageitinc@1");
+		driver.findElement(By.xpath("//button[@type='submit']")).click();
+		Thread.sleep(5000);
+		log.info("Login with valid credentials");
+		log.pass("Successfully login the application");
+
+		WebElement ele1 = driver.findElement(By.xpath("//a[@href='/applicants']"));
+		ele1.click();
+		Thread.sleep(2000);
+		log.info("Click on Applicants Icon");
+		log.pass("Successfully click on Applicants Icon");
+
+		driver.findElement(By.xpath("//a[contains(text(),'Add New')]")).click();
+		Thread.sleep(2000);
+		log.info("Click on Add New button");
+		log.pass("Successfully click on Add New button");
+
+		driver.findElement(By.xpath("//input[@formcontrolname='firstname']")).sendKeys("Automation");
+		log.info("Input the Applicant First Name in textbox");
+		log.pass("Successfully input the First Name in textbox");
+
+		driver.findElement(By.xpath("//input[@formcontrolname='lastname']")).sendKeys("Applicant01");
+		log.info("Input the Applicant Last Name in textbox");
+		log.pass("Successfully input the Last Name in textbox");
+
+		driver.findElement(By.xpath("//input[@formcontrolname='mobileNumber']")).sendKeys("9876543210");
+		log.info("Input the Applicant Mobile Number in textbox");
+		log.pass("Successfully input the Mobile Number in textbox");
+
+		driver.findElement(By.xpath("//input[@formcontrolname='email']")).sendKeys("applicantemail");
+		log.info("Input the Applicant Email Address in textbox");
+		log.pass("Successfully input the Email Address in textbox");
+
+		driver.findElement(By.xpath("//input[@formcontrolname='dateOfBirth']")).sendKeys("07/19/2000");
+		log.info("Select the Date Of Birth");
+		log.pass("Successfully Select the Date Of Birth");
+
+		// Work Authorization Drop down
+		// Implement select class for handling the drop down
+		WebElement WorkAuthorization_drp = driver.findElement(By.xpath("//select[@id='form-workAuthorization']"));
+		((JavascriptExecutor) driver).executeScript("arguments[0].click();", WorkAuthorization_drp);
+		Select st = new Select(WorkAuthorization_drp);
+		Thread.sleep(2000);
+
+		st.selectByIndex(2);
+		log.info("Using Select class handling the Work Authorization dropdown");
+		log.pass("Successfully click on Work Authorization dropdown and select the field");
+
+		driver.findElement(By.xpath("//input[@formcontrolname='workAuthorizationExpiryDate']")).sendKeys("07/19/2024");
+		log.info("Select the Work Authorization Expiry Date");
+		log.pass("Successfully Select the Work Authorization Expiry Date");
+
+		driver.findElement(By.xpath("//a[text()='Upload']"))
+				.sendKeys("C:\\Users\\Mukhid Khan\\Downloads\\bi weekly.pdf");
+		log.info("Upload the resume from system");
+		log.pass("Successfully Upload the resume from system");
+
+		driver.findElement(By.xpath("//input[@formcontrolname='linkedInURL']"))
+				.sendKeys("https://www.linkedin.com/in/upendra-kumar-barikee-156540342/");
+		log.info("Input the LinkedIn URL in textbox");
+		log.pass("Successfully Input the LinkedIn URL in textbox");
+
+		driver.findElement(By.xpath("//input[@formcontrolname='skills']")).sendKeys("Automation Testing");
+		log.info("Input the Skills in textbox");
+		log.pass("Successfully Input the Skills in textbox");
+
+		driver.findElement(By.xpath("//button[contains(text(),'Save')]")).click();
+		log.info("Click on Save button");
+		log.pass("Successfully click on save button");
+		Thread.sleep(2000);
+
+		driver.close();
+		log.pass("Successfully Close the browser");
+		log.pass("Successfully Vendor Added new Applicant");
+
 	}
 }
