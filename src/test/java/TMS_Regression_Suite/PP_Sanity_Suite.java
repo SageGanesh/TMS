@@ -1,10 +1,17 @@
 package TMS_Regression_Suite;
 
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
+import java.awt.event.KeyEvent;
 import java.time.Duration;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterTest;
@@ -142,9 +149,9 @@ public class PP_Sanity_Suite extends Base_Page_TMS {
 	}
 
 	@Test(priority = 2, description = "Add New Applicant by Vendor")
-	public void AddnewApplicant_By_Vendor() throws InterruptedException {
+	public void AddnewApplicant_By_Vendor() throws InterruptedException, AWTException {
 
-		ExtentTest log = extent.createTest("Add New Applicant by Vendor").assignCategory("App new Applicant");
+		ExtentTest log = extent.createTest("Add New Applicant by Vendor").assignCategory("Add new Applicant");
 		System.out.println(log.getStatus());
 		wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 		driver.findElement(By.xpath("//input[@id='email']")).sendKeys("mpathan@sageitinc.com");
@@ -200,8 +207,46 @@ public class PP_Sanity_Suite extends Base_Page_TMS {
 		log.info("Select the Work Authorization Expiry Date");
 		log.pass("Successfully Select the Work Authorization Expiry Date");
 
-		driver.findElement(By.xpath("//a[text()='Upload']"))
-				.sendKeys("C:\\Users\\Mukhid Khan\\Downloads\\bi weekly.pdf");
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+		WebElement uploadButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[text()='Upload']")));
+
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		js.executeScript("arguments[0].scrollIntoView(true);", uploadButton);
+
+		uploadButton.click();
+
+		WebElement fileinputs = driver.findElement(By.xpath("//a[@class='upload-link ng-star-inserted']"));
+
+		String filePath = "C:\\Users\\Mukhid Khan\\.ccd.pdf";
+
+		StringSelection strSelection = new StringSelection(filePath);
+
+		Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+
+		clipboard.setContents(strSelection, null);
+
+		Robot robot = new Robot();
+
+		robot.delay(300);
+
+		robot.keyPress(KeyEvent.VK_ENTER);
+
+		robot.keyRelease(KeyEvent.VK_ENTER);
+
+		robot.keyPress(KeyEvent.VK_CONTROL);
+
+		robot.keyPress(KeyEvent.VK_V);
+
+		robot.keyRelease(KeyEvent.VK_V);
+
+		robot.keyRelease(KeyEvent.VK_CONTROL);
+
+		robot.keyPress(KeyEvent.VK_ENTER);
+
+		robot.delay(200);
+
+		robot.keyRelease(KeyEvent.VK_ENTER);
+
 		log.info("Upload the resume from system");
 		log.pass("Successfully Upload the resume from system");
 
@@ -219,9 +264,77 @@ public class PP_Sanity_Suite extends Base_Page_TMS {
 		log.pass("Successfully click on save button");
 		Thread.sleep(2000);
 
+		// Get Confirmation Toaster
+		// Find the dynamic element using any suitable locator (example: id)
+		WebElement AddNewApplicanT_toaster = driver.findElement(By.xpath("//*[@id=\"toast-container\"]"));
+
+		// Use JavaScriptExecutor to retrieve text of the element
+		String AddNewApplicanT_toaster_text = (String) ((JavascriptExecutor) driver)
+				.executeScript("return arguments[0].textContent;", AddNewApplicanT_toaster);
+
+		// Print the text to the console
+		System.out.println("Add New Applicant Confirmation Toaster Message: " + AddNewApplicanT_toaster_text);
+		log.info("Get Added new Applicant toaster message");
+		log.pass("Successfully Get Added new Applicant toaster message in console");
+
+		driver.findElement(By.xpath("(//u[contains(text(),'CID')])[1]")).click();
+		Thread.sleep(2000);
+		log.info("Select the Latest Applicant");
+		log.pass("Successfully Select the Applicant");
+
+		driver.findElement(By.xpath("//a[normalize-space()='Submit to Requirements']")).click();
+		Thread.sleep(2000);
+		log.info("Click on Submit to Requirement button");
+		log.pass("Successfully Click on Submit to Requirement button");
+
+		driver.findElement(By.xpath("//input[@id='form-ceipalApplicantId']")).sendKeys("100");
+		log.info("Input the Pay Rate in textbox");
+		log.pass("Successfully input the Pay Rate in textbox");
+
+		// Work Authorization Drop down
+		// Implement select class for handling the drop down
+		WebElement Frequency_drp = driver.findElement(By.xpath("//select[@id='payRateFrequency']"));
+		((JavascriptExecutor) driver).executeScript("arguments[0].click();", Frequency_drp);
+		Select fre = new Select(Frequency_drp);
+		Thread.sleep(2000);
+
+		fre.selectByIndex(2);
+		log.info("Using Select class handling the Frequency dropdown");
+		log.pass("Successfully click on Frequency dropdown and select the field");
+
+		driver.findElement(By.xpath("(//input[@name='selectedRequirement'])[2]")).click();
+		log.info("Select the Requirement");
+		log.pass("Successfully select the requirement select the field");
+
+		driver.findElement(By.xpath("//button[normalize-space()='Submit']")).click();
+		log.info("Select the Submit button");
+		log.pass("Successfully select the Submit button");
+
 		driver.close();
 		log.pass("Successfully Close the browser");
 		log.pass("Successfully Vendor Added new Applicant");
+
+	}
+
+	@Test(priority = 2, description = "Change Submission Status by Requirement Agent")
+	public void RequiremetAgent_StatusChange() throws InterruptedException, AWTException {
+
+		ExtentTest log = extent.createTest("Change Submission Status by Requirement Agent")
+				.assignCategory("Change Sumission Status");
+		System.out.println(log.getStatus());
+		wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+		driver.findElement(By.xpath("//input[@id='email']")).sendKeys("RequirementAgent@sageitinc.com");
+		driver.findElement(By.xpath("//input[@placeholder='Enter password']")).sendKeys("Sageitinc@1");
+		driver.findElement(By.xpath("//button[@type='submit']")).click();
+		Thread.sleep(5000);
+		log.info("Login with valid credentials");
+		log.pass("Successfully login the application");
+
+		WebElement ele1 = driver.findElement(By.xpath("//a[@href='/sumissions']"));
+		ele1.click();
+		Thread.sleep(2000);
+		log.info("Click on Subbmissions Icon");
+		log.pass("Successfully click on Submissios Icon");
 
 	}
 }
