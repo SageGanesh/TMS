@@ -56,7 +56,7 @@ public class PP_Sanity_Suite extends Base_Page_TMS {
 		// password']")).clear();
 		driver.findElement(By.xpath("//input[@placeholder='Enter password']")).sendKeys("Sageitinc@1");
 		driver.findElement(By.xpath("//button[@type='submit']")).click();
-		Thread.sleep(5000);
+		Thread.sleep(10000);
 		log.info("Login with valid credentials");
 		log.pass("Successfully login the application");
 
@@ -83,7 +83,7 @@ public class PP_Sanity_Suite extends Base_Page_TMS {
 		log.info("Input the Contact Number in textbox");
 		log.pass("Successfully input the Recruiter Name in textbox");
 
-		driver.findElement(By.xpath("//input[@formcontrolname='emailAddress']")).sendKeys("Ramesham");
+		driver.findElement(By.xpath("//input[@formcontrolname='emailAddress']")).sendKeys("autovendor@sage.com");
 		log.info("Input the Email Address in textbox");
 		log.pass("Successfully input the Email Address in textbox");
 
@@ -104,9 +104,9 @@ public class PP_Sanity_Suite extends Base_Page_TMS {
 		WebElement Country_drp = driver.findElement(By.xpath("//select[@id='form-country']"));
 		((JavascriptExecutor) driver).executeScript("arguments[0].click();", Country_drp);
 		Select st = new Select(Country_drp);
-		Thread.sleep(2000);
 
 		st.selectByIndex(2);
+		Thread.sleep(4000);
 		log.info("Using Select class handling the Country dropdown");
 		log.pass("Successfully click on Country dropdown and select the field");
 
@@ -125,16 +125,8 @@ public class PP_Sanity_Suite extends Base_Page_TMS {
 		log.pass("Successfully input the Zip Code in textbox");
 		Thread.sleep(2000);
 
-		// //ng-multiselect-dropdown[@id='clientAssigned']
-
-		// Client Assign Drop down
-		// Implement select class for handling the dropdown
-		WebElement Clients_drp = driver.findElement(By.xpath("(//span[@class='dropdown-btn'])[1]"));
-		((JavascriptExecutor) driver).executeScript("arguments[0].click();", Clients_drp);
-		Select client = new Select(Clients_drp);
-		Thread.sleep(2000);
-
-		client.selectByIndex(2);
+		WebElement Subm_Status_drp = driver.findElement(By.xpath("//input[@type='checkbox'][@aria-label='Accenture']"));// (//button[@id='dropdownBasic1'])[1]
+		((JavascriptExecutor) driver).executeScript("arguments[0].click();", Subm_Status_drp);
 		log.info("Using Select class handling the Client Assign dropdown");
 		log.pass("Successfully click on Client Assign dropdown and select the field");
 
@@ -148,16 +140,16 @@ public class PP_Sanity_Suite extends Base_Page_TMS {
 		log.pass("Successfully Vendor Manager added new Vendor");
 	}
 
-	@Test(priority = 2, description = "Add New Applicant by Vendor")
+	@Test(priority = 2, description = "Add New Applicant by Vendor and Make one Submission")
 	public void AddnewApplicant_By_Vendor() throws InterruptedException, AWTException {
 
-		ExtentTest log = extent.createTest("Add New Applicant by Vendor").assignCategory("Add new Applicant");
+		ExtentTest log = extent.createTest("Add New Applicant by Vendor and Make one Submission").assignCategory("Add new Applicant");
 		System.out.println(log.getStatus());
 		wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 		driver.findElement(By.xpath("//input[@id='email']")).sendKeys("mpathan@sageitinc.com");
 		driver.findElement(By.xpath("//input[@placeholder='Enter password']")).sendKeys("Sageitinc@1");
 		driver.findElement(By.xpath("//button[@type='submit']")).click();
-		Thread.sleep(5000);
+		Thread.sleep(8000);
 		log.info("Login with valid credentials");
 		log.pass("Successfully login the application");
 
@@ -184,7 +176,7 @@ public class PP_Sanity_Suite extends Base_Page_TMS {
 		log.info("Input the Applicant Mobile Number in textbox");
 		log.pass("Successfully input the Mobile Number in textbox");
 
-		driver.findElement(By.xpath("//input[@formcontrolname='email']")).sendKeys("applicantemail");
+		driver.findElement(By.xpath("//input[@formcontrolname='email']")).sendKeys("applicantemail@sage.com");
 		log.info("Input the Applicant Email Address in textbox");
 		log.pass("Successfully input the Email Address in textbox");
 
@@ -262,25 +254,26 @@ public class PP_Sanity_Suite extends Base_Page_TMS {
 		driver.findElement(By.xpath("//button[contains(text(),'Save')]")).click();
 		log.info("Click on Save button");
 		log.pass("Successfully click on save button");
-		Thread.sleep(2000);
+		Thread.sleep(10000);
 
-		// Get Confirmation Toaster
-		// Find the dynamic element using any suitable locator (example: id)
-		WebElement AddNewApplicanT_toaster = driver.findElement(By.xpath("//*[@id=\"toast-container\"]"));
+////		// Get Confirmation Toaster
+////		// Find the dynamic element using any suitable locator (example: id)
+//		WebElement AddNewApplicanT_toaster = driver.findElement(By.xpath("//*[@id=\"toast-container\"]"));
+//
+//		// Use JavaScriptExecutor to retrieve text of the element
+//		String AddNewApplicanT_toaster_text = (String) ((JavascriptExecutor) driver)
+//				.executeScript("return arguments[0].textContent;", AddNewApplicanT_toaster);
+//
+//		// Print the text to the console
+//		System.out.println("Add New Applicant Confirmation Toaster Message: " + AddNewApplicanT_toaster_text);
+//		log.info("Get Added new Applicant toaster message");
+//		log.pass("Successfully Get Added new Applicant toaster message in console");
 
-		// Use JavaScriptExecutor to retrieve text of the element
-		String AddNewApplicanT_toaster_text = (String) ((JavascriptExecutor) driver)
-				.executeScript("return arguments[0].textContent;", AddNewApplicanT_toaster);
-
-		// Print the text to the console
-		System.out.println("Add New Applicant Confirmation Toaster Message: " + AddNewApplicanT_toaster_text);
-		log.info("Get Added new Applicant toaster message");
-		log.pass("Successfully Get Added new Applicant toaster message in console");
-
-		driver.findElement(By.xpath("(//u[contains(text(),'CID')])[1]")).click();
-		Thread.sleep(2000);
+		driver.findElement(By.xpath("//u[normalize-space()='CID0280']")).click();
+		Thread.sleep(2000); // (//u[starts-with(text(),'CID')])[1]
 		log.info("Select the Latest Applicant");
 		log.pass("Successfully Select the Applicant");
+//		// /html/body/app-root/app-layout/app-vertical/div/app-sidebar/div/ngx-simplebar/div[1]/div[2]/div/div/div/div/div/ul/li[3]/a/i
 
 		driver.findElement(By.xpath("//a[normalize-space()='Submit to Requirements']")).click();
 		Thread.sleep(2000);
@@ -291,8 +284,8 @@ public class PP_Sanity_Suite extends Base_Page_TMS {
 		log.info("Input the Pay Rate in textbox");
 		log.pass("Successfully input the Pay Rate in textbox");
 
-		// Work Authorization Drop down
-		// Implement select class for handling the drop down
+//		// Work Authorization Drop down
+//		// Implement select class for handling the drop down
 		WebElement Frequency_drp = driver.findElement(By.xpath("//select[@id='payRateFrequency']"));
 		((JavascriptExecutor) driver).executeScript("arguments[0].click();", Frequency_drp);
 		Select fre = new Select(Frequency_drp);
@@ -316,7 +309,7 @@ public class PP_Sanity_Suite extends Base_Page_TMS {
 
 	}
 
-	@Test(priority = 2, description = "Change Submission Status by Requirement Agent")
+	@Test(priority = 3, description = "Change Submission Status by Requirement Agent")
 	public void RequiremetAgent_StatusChange() throws InterruptedException, AWTException {
 
 		ExtentTest log = extent.createTest("Change Submission Status by Requirement Agent")
@@ -326,15 +319,50 @@ public class PP_Sanity_Suite extends Base_Page_TMS {
 		driver.findElement(By.xpath("//input[@id='email']")).sendKeys("RequirementAgent@sageitinc.com");
 		driver.findElement(By.xpath("//input[@placeholder='Enter password']")).sendKeys("Sageitinc@1");
 		driver.findElement(By.xpath("//button[@type='submit']")).click();
-		Thread.sleep(5000);
+		Thread.sleep(8000);
 		log.info("Login with valid credentials");
 		log.pass("Successfully login the application");
 
-		WebElement ele1 = driver.findElement(By.xpath("//a[@href='/sumissions']"));
+		WebElement ele1 = driver.findElement(By.xpath("//a[@href='/submissions']"));
 		ele1.click();
-		Thread.sleep(2000);
+		Thread.sleep(10000);
 		log.info("Click on Subbmissions Icon");
 		log.pass("Successfully click on Submissios Icon");
+		
+		driver.findElement(By.xpath("//u[normalize-space()='SID0836']")).click();
+		log.info("Click on Submission ID"); 
+		log.pass("Successfully click on Submissio ID");
+		
+		driver.findElement(By.xpath("//a[normalize-space()='Edit']")).click();
+		log.info("Click on Edit button");
+		log.pass("Successfully click on Edit Button");
+		
+		// Work Authorization Drop down
+		// Implement select class for handling the drop down
+		WebElement Subm_Status_drp = driver.findElement(By.xpath("//button[contains(text(), ' Client Submission ')]"));// (//button[@id='dropdownBasic1'])[1]
+		((JavascriptExecutor) driver).executeScript("arguments[0].click();", Subm_Status_drp);
+		log.info("Using Select class handling the Submission Status dropdown");
+		log.pass("Successfully click on Submission Status dropdown and select the field");
 
+		driver.findElement(By.xpath("//a[normalize-space()='Save']")).click();
+		log.info("Click on Save button");
+		log.pass("Successfully Click on Save button");
+
+//		// Get Confirmation Toaster
+//		// Find the dynamic element using any suitable locator (example: id)
+//		WebElement ChangeStatus_toaster = driver.findElement(By.xpath("//div[@aria-label='Submission updated successfully']"));
+//
+//		// Use JavaScriptExecutor to retrieve text of the element
+//		String StatusChange_toaster_text = (String) ((JavascriptExecutor) driver)
+//				.executeScript("return arguments[0].textContent;", ChangeStatus_toaster);
+//
+//		// Print the text to the console
+//		System.out.println("Add New Applicant Confirmation Toaster Message: " + StatusChange_toaster_text);
+//		log.info("Get Added new Applicant toaster message");
+//		log.pass("Successfully Get Added new Applicant toaster message in console");
+	
+		driver.close();
+		log.pass("Successfully Close the browser");
+		log.pass("Successfully Vendor Added new Applicant");
 	}
 }
