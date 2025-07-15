@@ -38,8 +38,28 @@ public class PP_Sprint26_US extends Base_Page_TMS {
 		extent.flush();
 	}
 
-	@Test(priority = 2, description = "Add new HCL Recruiter Mapping using Admin Panel")
-	public void AdminPanel_AddWorkAuthorization() throws InterruptedException, AWTException {
+	/*
+	 * Add AdminPanel_AddHclRecruiter_Mapping(): This method is use to Add HCL Recruiter Mapping
+	 * 
+	 * Steps: 
+	 * 1. Open the Browser 
+	 * 2. Login the application(Admin Role)
+	 * 3. Successfully open the Dashboard page 
+	 * 4. Click on Admin Settings 
+	 * 5. Click on HCL Recruiter Mapping
+	 * 6. Click on Add New button
+	 * 7. Input HCL Recruiter Name
+	 * 8. Select SageIT Recruiter
+	 * 9. SageIT Recruiter Email should be auto-populate
+	 *10. Click on Save button 
+	 *11. Verify Confirmation toaster for HCL Recruiter Mapping
+	 *12. Verify confirmation toaster should be print in console
+	 *13. Close the browser
+	 * 
+	 * 
+	 */
+	@Test(priority = 1, description = "Add new HCL Recruiter Mapping using Admin Panel")
+	public void AdminPanel_AddHclRecruiter_Mapping() throws InterruptedException, AWTException {
 
 		ExtentTest log = extent.createTest("Add new HCL Recruiter Mapping using Admin Panel")
 				.assignCategory("Add HCL Recruiter Mapping using Admin Panel");
@@ -52,7 +72,7 @@ public class PP_Sprint26_US extends Base_Page_TMS {
 		log.info("Login with valid credentials");
 		log.pass("Successfully login the application");
 
-		WebElement ele1 = driver.findElement(By.xpath("//i[@class='fa fa-cogs ng-star-inserted']"));
+		WebElement ele1 = driver.findElement(By.xpath("(//i[@class='fa fa-cogs ng-star-inserted'])[1]"));
 		ele1.click();
 		Thread.sleep(3000);
 		log.info("Click on Admin Settings Icon");
@@ -72,13 +92,14 @@ public class PP_Sprint26_US extends Base_Page_TMS {
 		log.info("Click on Add New button");
 		log.pass("Successfully click on Add New button");
 
-		driver.findElement(By.xpath("//input[@id='form-hclRecruiterName']")).sendKeys("Automation Recruiter Name01");
+		driver.findElement(By.xpath("//input[@id='form-hclRecruiterName']")).sendKeys("Add Automation Recruiter");
 		Thread.sleep(2000);
 		log.info("Input HCL Recruiter Name in textbox");
 		log.pass("Successfully input the HCL Recruiter Name in textbox");
-		
-		driver.findElement(By.xpath("//span[normalize-space()='Abhinov Dara']")).click();
+
+		driver.findElement(By.xpath("//input[@aria-autocomplete='list']")).sendKeys("Abhinov Dara");
 		Thread.sleep(2000);
+		driver.findElement(By.xpath("//span[@class='ng-option-label ng-star-inserted']")).click();
 		log.info("Select SageIT Recruiter");
 		log.pass("Successfully input the HCL Recruiter Name in textbox");
 
@@ -87,8 +108,19 @@ public class PP_Sprint26_US extends Base_Page_TMS {
 		log.info("Click on Save button");
 		log.pass("Successfully Click on Save button");
 
+		WebElement HclRecruiter_cnfstr = driver.findElement(By.xpath("//div[@id='toast-container']"));
+
+		// Use JavaScriptExecutor to retrieve text of the element
+		String HclRecruiter_toaster_text = (String) ((JavascriptExecutor) driver)
+				.executeScript("return arguments[0].textContent;", HclRecruiter_cnfstr);
+
+		// Print the text to the console
+		System.out.println("HCL Recruiter Mapping toaster message: " + HclRecruiter_toaster_text);
+		log.info("Get HCL Recruiter Mapping Confirmation toaster message");
+		log.pass("Successfully Get HCL Recruiter Mapping Confirmation toaster message in console");
+
 		driver.close();
 		log.pass("Successfully Close the browser");
-		log.pass("Successfully Add/Update End Client");
+		log.pass("Successfully Add HCL Recruiter Mapping");
 	}
 }
